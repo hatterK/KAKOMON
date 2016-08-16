@@ -1,0 +1,10 @@
+<%= form_for @past_question do |f| %>
+
+<p>
+	<%= f.label :科目名 %><br>
+	<%= f.text_field :subject %>
+	<%= f.label :教授 %><br>
+	<%= f.text_field :teacher %>
+	<%= f.label :タグ %><br>
+	<%= f.text_field : %>
+</p>

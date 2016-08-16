@@ -1,0 +1,10 @@
+<h1>Edit</h1>
+
+<%= render 'form' %>
+
+<p>
+	<%= t.submit %>
+</p>
+
+
+<% end %>

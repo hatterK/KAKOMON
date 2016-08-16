@@ -1,0 +1,32 @@
+<h1>過去問データベース</h1> 
+<p><%= link_to "アップロード", new_project_path,class => 'btn btn-primary pull-right' %></p>
+
+
+
+<div class="container">
+  <table class="table table-striped"> 
+    <thead>
+      <tr>
+        <th>科目名</th>
+        <th>教授</th>
+        <th>開講期</th>
+        <th>年度</th>
+        <th>閲覧数</th>
+        <th>タグ</th>
+        <th>編集・削除</th>
+      </tr>
+    </thead>
+    <tbody>
+     <% @past_questions.each do |past_question| %>
+	<th><%= link_to past_question.subject, past_question.file_path %></th>
+	<td><%= past_question.teacher %></td>
+	<td><%= exam_date.term %></td>
+	<td><%= exam_date.year %></td>
+	<td><%= past_question.views %></td>
+	<td>tag</td>
+	<td><%= link_to "[編集]", edit_past_question_path(past_question.id),class => 'btn btn-default btn-sm' %>
+	    <%= link_to "[削除]", past_question_path(past_question.id),class => 'btn btn-danger btn-sm', method: :delete, data: {confirm: "本当に削除しますか?" } %></td>
+     <% end %>
+    </tbody>
+  </table>
+</div>

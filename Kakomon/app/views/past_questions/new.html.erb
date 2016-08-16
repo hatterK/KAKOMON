@@ -1,0 +1,12 @@
+<h1>アップロード</h1>
+
+<%= render 'form' %>
+    <%= f.label :過去問ファイル %><br>
+    <%= f.file_field :past_question %>
+    <%= f.hidden_field :past_question_cache %>
+
+<p>
+	<%= f.submit %>
+</p>
+
+<% end %>

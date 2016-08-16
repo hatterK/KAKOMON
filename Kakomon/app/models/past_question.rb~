@@ -10,7 +10,7 @@ class PastQuestion < ActiveRecord::Base
   validates :file_path, lenth: { maximum: 100 }
   validate :check_file_path
 
-  mount_uploader :file_path, PastQuestion 
+  mount_uploader :picture, PictureUploader
 
   private
   def check_file_path

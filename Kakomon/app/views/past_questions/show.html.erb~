@@ -1,0 +1,16 @@
+<h1><%= @past_question.title %></h1>
+
+<p>
+<ul>
+<li>教授:<%= @past_question.teacer %></li>
+<li>開講期:<%= @past_question.teacer %></li>
+<li>年度:<%= @exam_date.year %></li>
+<li>タグ:</li>
+</ul>
+</p>
+
+<p>
+  <%= image_tag @past_question.file_path %>
+</p>
+
+
