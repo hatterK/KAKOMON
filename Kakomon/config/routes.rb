@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
-resources :past_questions
-root 'past_questions#index'
+
+  root 'past_questions#index'
+
+  resources :past_questions do
+    collection { get "search", "sort" }
+  end
+
+  resources :exam_dates, only: [:index, :show] do
+    collection { get "search_by_term", "search_by_year" }
+  end
+
+  resources :tags, only: [:index, :show]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
