@@ -1,6 +1,7 @@
 <h1><%= @past_question.subject %></h1>
 
-<p><%= link_to "一覧に戻る", :past_questions %>
+<p><%= link_to "一覧に戻る", :past_questions %></p>
+<p><%= link_to "編集する", [:edit, @past_question] %></p>
 <p>
   <ul>
     <li>教授:<%= @past_question.teacher %></li>

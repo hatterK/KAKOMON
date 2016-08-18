@@ -26,4 +26,8 @@
     <th><%= f.label :追加日時 %></th>
     <td><%= f.date_select :added_time, start_year: 2010, end_year: Time.now.year, use_month_numbers: true %></td>
   </tr>
+  <tr>
+    <th><%= f.label :タグの追加 %></th>
+    <td><%= f.text_field :tag_name %></td>
+  </tr>
 </table>

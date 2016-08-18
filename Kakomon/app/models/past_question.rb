@@ -18,6 +18,7 @@ class PastQuestion < ActiveRecord::Base
   # validates :tag_name, length: { maximum: 10 }
 
   attr_accessor :tag_name, :year, :term
+
   # mount_uploader :file_path, PastQuestion
 
   private

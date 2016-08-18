@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   resources :past_questions do
     collection { get "search", "sort" }
+    resources :tags, only: [:index, :show] do
+      member { get "untag" }
+    end
   end
 
   resources :exam_dates, only: [:index, :show] do

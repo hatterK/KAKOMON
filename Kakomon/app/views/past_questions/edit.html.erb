@@ -5,8 +5,17 @@
 
 <%= render 'form', f: f %>
 
+<table>
+<% @past_question.tags.each do |tag| %>
+  <tr>
+    <th><%= tag.name %></th>
+    <td><%= link_to "削除", [:untag, @past_question, tag] %></td>
+  </tr>
+<% end %>
+</table>
 <p>
 	<%= f.submit %>
 </p>
+
 
 <% end %>
