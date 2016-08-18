@@ -1,32 +1,41 @@
-<h1>過去問データベース</h1> 
-<p><%= link_to "アップロード", new_project_path,class => 'btn btn-primary pull-right' %></p>
-
+<h1>過去問データベース</h1>
+<p><%= link_to "アップロード", :new_past_question %></p>
+<p><%= flash.notice %></p>
 
 
 <div class="container">
-  <table class="table table-striped"> 
+  <table class="table table-striped">
     <thead>
       <tr>
+        <th>id</th>
         <th>科目名</th>
         <th>教授</th>
         <th>開講期</th>
         <th>年度</th>
         <th>閲覧数</th>
         <th>タグ</th>
+        <th>追加日時</th>
         <th>編集・削除</th>
       </tr>
     </thead>
+  <% @past_questions.each do |past_question| %>
     <tbody>
-     <% @past_questions.each do |past_question| %>
-	<th><%= link_to past_question.subject, past_question.file_path %></th>
-	<td><%= past_question.teacher %></td>
-	<td><%= exam_date.term %></td>
-	<td><%= exam_date.year %></td>
-	<td><%= past_question.views %></td>
-	<td>tag</td>
-	<td><%= link_to "[編集]", edit_past_question_path(past_question.id),class => 'btn btn-default btn-sm' %>
-	    <%= link_to "[削除]", past_question_path(past_question.id),class => 'btn btn-danger btn-sm', method: :delete, data: {confirm: "本当に削除しますか?" } %></td>
-     <% end %>
+      <td><%= link_to past_question.id, past_question %></td>
+	    <td><%= link_to past_question.subject, past_question.file_path %></td>
+	    <td><%= past_question.teacher %></td>
+	    <td><%= past_question.exam_date.term %></td>
+	    <td><%= past_question.exam_date.year %></td>
+      <td><%= past_question.views %></td>
+	    <td>
+        <% past_question.tags.each do |tag| %>
+          <%= link_to tag.name, tag %>
+        <% end %>
+      </td>
+      <td><%= past_question.added_time %>
+	    <td><%= link_to "[編集]", [:edit, past_question] %>
+	        <%= link_to "[削除]", past_question, method: :delete, data: {confirm: "本当に削除しますか?" } %>
+      </td>
     </tbody>
+  <% end %>
   </table>
 </div>

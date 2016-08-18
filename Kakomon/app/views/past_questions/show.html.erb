@@ -1,16 +1,18 @@
-<h1><%= @past_question.title %></h1>
+<h1><%= @past_question.subject %></h1>
 
+<p><%= link_to "一覧に戻る", :past_questions %>
 <p>
-<ul>
-<li>教授:<%= @past_question.teacer %></li>
-<li>開講期:<%= @past_question.teacer %></li>
-<li>年度:<%= @exam_date.year %></li>
-<li>タグ:</li>
-</ul>
+  <ul>
+    <li>教授:<%= @past_question.teacher %></li>
+    <li>開講期:<%= @past_question.exam_date.term %></li>
+    <li>年度:<%= @past_question.exam_date.year %></li>
+    <li>タグ:
+      <% @past_question.tags.each do |tag| %>
+        ●<%= tag.name %>●<%= " " %>
+      <% end %>
+    </li>
+    <li>exam_date_id : <%= @past_question.exam_date_id %></li>
+  </ul>
 </p>
 
-<p>
-  <%= image_tag @past_question.file_path.url %>
-</p>
-
-
+<p>イメージタグを埋め込む</p>

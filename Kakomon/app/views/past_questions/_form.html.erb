@@ -1,13 +1,29 @@
-<%= form_for @past_question do |f| %>
 
-<p>
-	<%= f.label :科目名 %><br>
-	<%= f.text_field :subject %>
-	<%= f.label :教授 %><br>
-	<%= f.text_field :teacher %>
-	<%= f.label :年度 %><br>
-	<%= f.text_field :year %>
-	<%= f.label :開講期 %><br>
-	<%= select_tag 'exam_date[term]', options_for_select(["前期", "後期", "通年", "前期集中", "後期集中"]) %>
-	
-</p>
+<table>
+  <tr>
+  	<th width="100"><%= f.label :科目名 %></th>
+  	<td><%= f.text_field :subject %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label :教授 %></th>
+  	<td><%= f.text_field :teacher %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label :年度 %></th>
+  	<td><%= f.text_field :year %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label :開講期 %></th>
+  	<td>
+      <%= f.text_field :term %>
+      <% select_tag :term, options_for_select(["前期", "後期", "通年", "前期集中", "後期集中"]) %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :ファイルパス %></th>
+    <td><%= f.text_field :file_path %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :追加日時 %></th>
+    <td><%= f.date_select :added_time, start_year: 2010, end_year: Time.now.year, use_month_numbers: true %></td>
+  </tr>
+</table>
