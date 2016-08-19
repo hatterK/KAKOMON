@@ -10,23 +10,70 @@ class PastQuestion < ActiveRecord::Base
   validates :teacher, length: { maximum: 20 }
   validates :file_path, presence: true
   validates :file_path, length: { maximum: 100 }
-  validate :check_file_path
   validates :added_time, presence: true
+  validate :check_image
+  validate :check_file_path
   # validates :year, :term, presence: { on: :create }
   # validates :year, numericality: { greater_than: 2000, less_than: 3000, allow_blank: true }
   # validates :term, length: { maximum: 20 }
   # validates :tag_name, length: { maximum: 10 }
 
   attr_accessor :tag_name, :year, :term
+  attr_reader :uploaded_image
+
+  IMAGE_TYPES = ["jpg", "png", "pdf"]
 
   # mount_uploader :file_path, PastQuestion
 
+  def uploaded_image=(image)
+    @extension = convert_content_type(image.content_type)
+    @data = image.read
+    file_name = File.basename(image.original_filename, ".*")
+    path_p = Rails.root.join("app/assets/images", @extension)
+    path = path_p + "#{file_name}.#{@extension}"
+
+    if FileTest.exists?(path)
+      num = 0
+      begin
+        num += 1
+        path = path_p + "#{file_name}#{num}.#{@extension}"
+      end while FileTest.exists?(path)
+    end
+
+    open(path, 'wb') do |output|
+      output.write(@data)
+    end
+    self.file_path = "#{@extension}/" + File.basename(path)
+    @uploaded_image = image
+  end
+
+  private
+  def convert_content_type(ctype)
+    ctype = ctype.rstrip.downcase
+    case ctype
+      when "image/pjepg" then "jpg"
+      when "image/jpg" then "jpg"
+      when "image/x-png" then "png"
+      when "image/jpeg" then "jpg"
+      when "image/png" then "png"
+      when %r{.*application/pdf.*} then "pdf"
+    end
+  end
+
+  def check_image
+    if @uploaded_image
+      if @data.size > 3.megabytes
+        errors.add(:uploaded_image, "too_big_image")
+      end
+    end
+  end
+
   private
   def check_file_path
-    content_type = File.extname("#{file_path}")
+    content_type = File.extname(file_path)
     path = Rails.root.join("app/assets/images", file_path)
-    errors.add(:file_path, :invalid) unless (content_type =~ /[jJ][pP].?[gG]\z|[pP][nN][gG]\z|[pP][dD][fF]\z/)
-    # errors.add(:file_path, :file_not_exist) unless File.exists?(path)
+    errors.add(:file_path, "invalid_image") unless (content_type =~ /[jJ][pP].?[gG]\z|[pP][nN][gG]\z|[pP][dD][fF]\z/)
+    errors.add(:file_path, "file_not_exist" ) unless File.exists?(path)
   end
 
   class << self
