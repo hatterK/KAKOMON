@@ -13,7 +13,16 @@
       <% end %>
     </li>
     <li>exam_date_id : <%= @past_question.exam_date_id %></li>
+    <% @past_question.tags.each do |tag| %>
+        <li>tag_id : <%= tag.id %></li>
+    <% end %>
   </ul>
 </p>
 
 <p>イメージタグを埋め込む</p>
+
+<% if File.extname(@past_question.file_path) == ".pdf" %>
+  <embed src=<%= image_url(@past_question.file_path) %> type="application/pdf" width="100%" height="800px">
+<% else %>
+  <%= image_tag( image_url(@past_question.file_path), width="80%", alt: "過去問の画像") %>
+<% end %>
