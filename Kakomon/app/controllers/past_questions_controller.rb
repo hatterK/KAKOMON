@@ -68,7 +68,7 @@ class PastQuestionsController < ApplicationController
 
   private
   def past_question_params
-    attrs = [:subject, :kana, :teacher, :added_time, :file_path]
+    attrs = [:subject, :kana, :teacher, :added_time, :file_path, :uploaded_image]
     params.require(:past_question).permit(attrs)
   end
 
