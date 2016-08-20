@@ -19,6 +19,7 @@ class PastQuestion < ActiveRecord::Base
   # validates :tag_name, length: { maximum: 10 }
 
   attr_accessor :tag_name, :year, :term
+  attr_accessor :search_subject, :search_teacher, :search_year, :search_term, :search_tag1, :search_tag2, :search_tag3
   attr_reader :uploaded_image
 
   IMAGE_TYPES = ["jpg", "png", "pdf"]
@@ -78,11 +79,36 @@ class PastQuestion < ActiveRecord::Base
 
   class << self
     def search(query)
-      list = self.order(added_time: :desc)
-      if query.present?
+      list = self.order(:id)
+      if query[:search_subject].present?
         list = list.where("subject LIKE ? OR kana LIKE ?",
-          "%#{query}%", "%#{query}%" )
+          "%#{query[:search_subject]}%", "%#{query[:search_subject]}%" )
       end
+      if query[:search_teacher].present?
+        list = list.where("teacher LIKE ?", "%#{query[:search_teacher]}%")
+      end
+      if query[:search_year].present? || query[:search_term]
+        list = list.joins(:exam_date)
+        if query[:search_year].present?
+          list = list.where("exam_dates.year = ?", query[:search_year])
+        end
+        if query[:search_term].present?
+          list = list.where("exam_dates.term LIKE ?","%#{query[:search_term]}%")
+        end
+      end
+      if query[:search_tag1].present? || query[:search_tag2].present? || query[:search_tag3].present?
+        list = list.joins(:tags)
+        if query[:search_tag1].present?
+          list = list.where("tags.name LIKE ?", "%#{query[:search_tag1]}%")
+        end
+        if query[:search_tag2].present?
+          list = list.where("tags.name LIKE ?", "%#{query[:search_tag2]}%")
+        end
+        if query[:search_tag3].present?
+          list = list.where("tags.name LIKE ?", "%#{query[:search_tag3]}%")
+        end
+      end
+      list = list.uniq
       list
     end
 
