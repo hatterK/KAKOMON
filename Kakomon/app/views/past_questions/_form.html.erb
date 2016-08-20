@@ -15,12 +15,16 @@
   <tr>
   	<th><%= f.label :開講期 %></th>
   	<td>
-      <%= f.text_field :term %>
-      <% select_tag :term, options_for_select(["前期", "後期", "通年", "前期集中", "後期集中"]) %></td>
+      <% f.text_field :term %>
+      <%= f.select :term, [["前期","first_term"],["後期", "latter_term"],["通年", "all_term"],["前期集中","first_c"],["後期集中", "latter_c"]] %></td>
   </tr>
   <tr>
     <th><%= f.label :ファイルパス %></th>
     <td><%= f.text_field :file_path %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :ファイルアップロード %></th>
+    <td><%= f.file_field :uploaded_image %></td>
   </tr>
   <tr>
     <th><%= f.label :追加日時 %></th>

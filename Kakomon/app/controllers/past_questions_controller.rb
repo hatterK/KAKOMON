@@ -5,7 +5,8 @@ class PastQuestionsController < ApplicationController
   end
 
   def search
-    @past_questions = PastQuestion.search(params[:q])
+    # example => PastQuestion.search({search_subject: "pdf", search_year: 2019, search_term: "term", search_tag1: "tag"})
+    @past_questions = PastQuestion.search(search_params)
     render :index
   end
 
@@ -68,7 +69,7 @@ class PastQuestionsController < ApplicationController
 
   private
   def past_question_params
-    attrs = [:subject, :kana, :teacher, :added_time, :file_path]
+    attrs = [:subject, :kana, :teacher, :added_time, :uploaded_image]
     params.require(:past_question).permit(attrs)
   end
 
@@ -80,6 +81,11 @@ class PastQuestionsController < ApplicationController
   private
   def tag_params_name
     params.require(:past_question).permit(:tag_name)[:tag_name]
+  end
+
+  private
+  def search_params
+    params.permit(:search_subject, :search_teacher, :search_year, :search_term, :search_tag1, :search_tag2, :search_tag3)
   end
 
   private
