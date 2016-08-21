@@ -1,0 +1,25 @@
+<% @page_title = "メンバーの一覧" %>
+<h1><%= @page_title %></h1>
+
+<p><%= link_to "メンバーの追加", :new_member %></p>
+
+<% if @members.present? %>
+<table>
+  <tr>
+    <th>ユーザー名</th>
+    <th>操作</th>
+  </tr>
+  <% @members.each do |member| %>
+  <tr>
+    <td><%= link_to member.name, member %></td>
+    <td>
+      <%= link_to "編集", [:edit, member] %>
+      <%= link_to "削除", member, method: :delete,
+            data: { confirm: "本当に削除しますか？"} %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<% else %>
+<p>会員情報がありません</p>
+<% end %>
