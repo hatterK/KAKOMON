@@ -7,13 +7,33 @@ class ExamDate < ActiveRecord::Base
 
 
   class << self
-    def search(param, val)
-      list = self.order()
-      if query.present?
-        list = list.where("? LIKE ?",
-          "%#{param}%", "%#{val}%" )
+    def get_exam_date(exam_params)
+      if self.exists?(exam_params)
+        exam_date = self.find_by(exam_params)
+        exam_date
+      else
+        exam_date = self.new(exam_params)
+        if exam_date.save
+          exam_date
+        else
+          nil
+        end
       end
-      list
+    end
+
+    def search(year_q, term_q)
+      if year_q.present? || term_q.present?
+        list = self.order(:id)
+        if year_q.present?
+          list = list.where("year LIKE ?","%#{year_q}%" )
+        end
+        if term_q.present?
+          list = list.where("term LIKE ?", "%#{term_q}%")
+        end
+        list
+      else
+        nil
+      end
     end
   end
 end

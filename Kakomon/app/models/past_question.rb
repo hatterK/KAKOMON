@@ -13,10 +13,6 @@ class PastQuestion < ActiveRecord::Base
   validates :added_time, presence: true
   validate :check_image
   validate :check_file_path
-  # validates :year, :term, presence: { on: :create }
-  # validates :year, numericality: { greater_than: 2000, less_than: 3000, allow_blank: true }
-  # validates :term, length: { maximum: 20 }
-  # validates :tag_name, length: { maximum: 10 }
 
   attr_accessor :tag_name, :year, :term
   attr_accessor :search_subject, :search_teacher, :search_year, :search_term, :search_tag1, :search_tag2, :search_tag3

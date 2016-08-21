@@ -10,6 +10,13 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
   end
 
+  def set_tag
+    @past_question = PastQuestion.find(params[:past_question_id])
+    new_tag = Tag.get_tag(params[:name])
+    @past_question.tags << new_tag
+    redirect_to @past_question, notice: "タグを追加しました。"
+  end
+
   def untag
     @past_question = PastQuestion.find(params[:past_question_id])
     @past_question.tags.destroy(Tag.find(params[:id]))
