@@ -1,5 +1,9 @@
 class PastQuestionsController < ApplicationController
 
+  before_action :login_required, except: [:index]
+  before_action :editor_login_required, only: [:new, :edit, :create, :update]
+  before_action :super_login_required, only: [:destroy]
+
   def index
     @past_questions = PastQuestion.order(:id)
   end

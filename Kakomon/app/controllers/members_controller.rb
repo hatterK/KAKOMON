@@ -1,4 +1,6 @@
 class MembersController < ApplicationController
+  before_action :super_login_required, except: [:index]
+  
   def index
     @members = Member.order(:id)
   end

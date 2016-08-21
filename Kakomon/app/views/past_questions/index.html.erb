@@ -1,4 +1,5 @@
 <h1>過去問データベース</h1>
+<p><%= link_to "login", :members %></p>
 <p><%= link_to "アップロード", :new_past_question, class:'btn btn-primary pull-right' %></p>
 <p><%= flash.notice %></p>
 <br><br>
@@ -9,75 +10,84 @@ font-size: large;
 }
 </style>
 
-<cp><%= link_to "トップへ戻る", :past_questions %></p>
+<p><%= link_to "トップへ戻る", :past_questions %></p>
 
-<%= form_tag :search_past_questions, method: :get do %>
-  <table>
-    <tr>
-      <th>教科名　：　</th>
-      <td><%= text_field_tag "search_subject", params[:search_subject] %></td>
-    </tr>
-    <tr>
-      <th>教師　：　</th>
-      <td><%= text_field_tag "search_teacher", params[:search_teacher] %></td>
-    </tr>
-    <tr>
-      <th>年度　：　</th>
-      <td><%= text_field_tag "search_year", params[:search_year] %></td>
-    </tr>
-    <tr>
-      <th>開講期　：　</th>
-      <td><%= text_field_tag "search_term", params[:search_term] %></td>
-    </tr>
-    <tr>
-      <th>タグ名　：　</th>
-      <td><%= text_field_tag "search_tag1", params[:search_tag1] %></td>
-    </tr>
-    <tr>
-      <th>タグ名　：　</th>
-      <td><%= text_field_tag "search_tag2", params[:search_tag2] %></td>
-    </tr>
-    <tr>
-      <th>タグ名　：　</th>
-      <td><%= text_field_tag "search_tag3", params[:search_tag3] %></td>
-    </tr>
-    <tr>
-      <td><%= submit_tag "検索" %></td>
-    </tr>
-  </table>
-<% end %>
-
-<div class="container">
-  <table class="table table-hover">
-    <thead>
+<% if current_member %>
+  <%= form_tag :search_past_questions, method: :get do %>
+    <table>
       <tr>
-        <th>科目名</th>
-        <th>教授</th>
-        <th>開講期</th>
-        <th>年度</th>
-        <th>閲覧数</th>
-        <th>タグ</th>
-        <th>追加日時</th>
-        <th>編集・削除</th>
+        <th>教科名　：　</th>
+        <td><%= text_field_tag "search_subject", params[:search_subject] %></td>
       </tr>
-    </thead>
-  <% @past_questions.each do |past_question| %>
-    <tbody>
-	    <td><%= link_to past_question.subject, past_question %></td>
-	    <td><%= past_question.teacher %></td>
-	    <td><%= past_question.exam_date.term %></td>
-	    <td><%= past_question.exam_date.year %></td>
-      <td><%= past_question.views %></td>
-	    <td>
-        <% past_question.tags.each do |tag| %>
-          <%= link_to tag.name, tag %>
-        <% end %>
-      </td>
-      <td><%= past_question.added_time %>
-	    <td><%= link_to "編集", [:edit, past_question], class:'btn btn-default btn-sm' %>
-	        <%= link_to "削除", past_question, method: :delete, data: {confirm: "本当に削除しますか?" },class:'btn btn-danger btn-sm' %>
-      </td>
-    </tbody>
+      <tr>
+        <th>教師　：　</th>
+        <td><%= text_field_tag "search_teacher", params[:search_teacher] %></td>
+      </tr>
+      <tr>
+        <th>年度　：　</th>
+        <td><%= text_field_tag "search_year", params[:search_year] %></td>
+      </tr>
+      <tr>
+        <th>開講期　：　</th>
+        <td><%= text_field_tag "search_term", params[:search_term] %></td>
+      </tr>
+      <tr>
+        <th>タグ名　：　</th>
+        <td><%= text_field_tag "search_tag1", params[:search_tag1] %></td>
+      </tr>
+      <tr>
+        <th>タグ名　：　</th>
+        <td><%= text_field_tag "search_tag2", params[:search_tag2] %></td>
+      </tr>
+      <tr>
+        <th>タグ名　：　</th>
+        <td><%= text_field_tag "search_tag3", params[:search_tag3] %></td>
+      </tr>
+      <tr>
+        <td><%= submit_tag "検索" %></td>
+      </tr>
+    </table>
   <% end %>
-  </table>
-</div>
+
+  <div class="container">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>科目名</th>
+          <th>教授</th>
+          <th>開講期</th>
+          <th>年度</th>
+          <th>閲覧数</th>
+          <th>タグ</th>
+          <th>追加日時</th>
+          <% if editor_member %>
+            <th>編集・削除</th>
+          <% end %>
+        </tr>
+      </thead>
+    <% @past_questions.each do |past_question| %>
+      <tbody>
+  	    <td><%= link_to past_question.subject, past_question %></td>
+  	    <td><%= past_question.teacher %></td>
+  	    <td><%= past_question.exam_date.term %></td>
+  	    <td><%= past_question.exam_date.year %></td>
+        <td><%= past_question.views %></td>
+  	    <td>
+          <% past_question.tags.each do |tag| %>
+            <%= link_to tag.name, tag %>
+          <% end %>
+        </td>
+        <td><%= past_question.added_time %></td>
+      <% if editor_member %>
+  	    <td><%= link_to "編集", [:edit, past_question], class:'btn btn-default btn-sm' %>
+          <% if super_member %>
+  	        <%= link_to "削除", past_question, method: :delete, data: {confirm: "本当に削除しますか?" },class:'btn btn-danger btn-sm' %>
+          <% end %>
+        </td>
+      <% end %>
+      </tbody>
+    <% end %>
+    </table>
+  </div>
+
+<% end %>

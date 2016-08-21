@@ -19,12 +19,14 @@ class Member < ActiveRecord::Base
     @password = val
   end
 
-  def authenticate( name, password )
-    member = find_by(name: name)
-    if member && member.hashed_password.present? && BCrypt::Password.new(member.hashed_password) == password
-      member
-    else
-      nil
+  class << self
+    def authenticate( name, password )
+      member = find_by(name: name)
+      if member && member.hashed_password.present? && BCrypt::Password.new(member.hashed_password) == password
+        member
+      else
+        nil
+      end
     end
   end
 

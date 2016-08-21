@@ -1,4 +1,5 @@
 class ExamDatesController < ApplicationController
+  before_action :login_required
 
   def index
     @exam_dates = ExamDate.order(year: :desc)

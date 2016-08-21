@@ -1,4 +1,7 @@
 class TagsController < ApplicationController
+  before_action :login_required
+  before_action :editor_login_required, only: [:untag]
+
   def index
     @tags = Tag.order("name")
   end

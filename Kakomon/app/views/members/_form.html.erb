@@ -1,5 +1,3 @@
-<%= render "shared/errors", obj: @member %>
-
 <table>
   <tr>
     <th><%= form.label :name, "ユーザー名" %></th>
@@ -7,10 +5,9 @@
   </tr>
 <% if controller.kind_of?(MembersController) %>
   <tr>
-    <th>管理者</th>
+    <th><%= form.label :access_authority, "アクセス権限" %></th>
     <td>
-      <%= form.check_box :administrator %>
-      <%= form.label :administrator, "管理者" %>
+      <%= form.select :access_authority, [["一般ユーザー", 3],["編集者", 2],["管理者", 1]] %>
     </td>
   </tr>
 <% end %>
