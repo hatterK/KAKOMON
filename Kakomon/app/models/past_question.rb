@@ -71,10 +71,14 @@ class PastQuestion < ActiveRecord::Base
 
   private
   def check_file_path
-    content_type = File.extname(file_path)
-    path = Rails.root.join("app/assets/images", file_path)
-    errors.add(:file_path, "invalid_image") unless (content_type =~ /[jJ][pP].?[gG]\z|[pP][nN][gG]\z|[pP][dD][fF]\z/)
-    errors.add(:file_path, "file_not_exist" ) unless File.exists?(path)
+    if file_path
+      content_type = File.extname(file_path)
+      path = Rails.root.join("app/assets/images", file_path)
+      errors.add(:file_path, "invalid_image") unless (content_type =~ /[jJ][pP].?[gG]\z|[pP][nN][gG]\z|[pP][dD][fF]\z/)
+      errors.add(:file_path, "file_not_exist" ) unless File.exists?(path)
+    else
+      errors.add(:file_path, "file_not_exist")
+    end
   end
 
   class << self
