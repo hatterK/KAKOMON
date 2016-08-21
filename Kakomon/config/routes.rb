@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :past_questions do
     collection { get "search", "sort" }
     resources :tags, only: [:index, :show] do
+      collection { post "set_tag" }
       member { get "untag" }
     end
   end

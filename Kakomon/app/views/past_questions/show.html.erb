@@ -18,6 +18,10 @@
     <% end %>
   </ul>
 </p>
+<p><%= form_tag [:set_tag, @past_question, :tags] %>
+  <%= text_field_tag "name", params[:name] %>
+  <%= submit_tag "タグを追加" %>
+</p>
 
 <p>イメージタグを埋め込む</p>
 
