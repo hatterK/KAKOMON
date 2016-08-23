@@ -1,10 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe "Tags", type: :request do
-  describe "GET /tags" do
-    it "works! (now write some real specs)" do
-      get tags_index_path
-      expect(response).to have_http_status(200)
+  describe 'ステータスコードチェック' do
+    before do
+      login Member.create(name: 'some_name', password: 'some_password', password_confirmation: 'some_password')
+    end
+
+    xit 'index' do
+    end
+
+    xit 'show' do
+    end
+
+    xit 'set_tag' do
+    end
+
+    xit 'untag' do
     end
   end
 end
