@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "ExamDates", type: :request do
   describe 'ステータスコードチェック' do
-    let!(:exam_date) { ExamDate.create(year: rand(2010..2015), term: ['前期', '後期'].sample) }
+    let!(:exam_date) { ExamDate.create(year: rand(2011..2015), term: ['前期', '後期'].sample) }
     before do
       login Member.create(name: 'some_general_member', access_authority: 2, password: 'some_password')
     end
