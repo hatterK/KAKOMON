@@ -1,0 +1,25 @@
+<table>
+  <tr>
+    <th><%= form.label :name, "ユーザー名" %></th>
+    <td><%= form.text_field :name %></td>
+  </tr>
+<% if controller.kind_of?(MembersController) %>
+  <tr>
+    <th><%= form.label :access_authority, "アクセス権限" %></th>
+    <td>
+      <%= form.select :access_authority, [["一般ユーザー", 3],["編集者", 2],["管理者", 1]] %>
+    </td>
+  </tr>
+<% end %>
+  <tr>
+    <th><%= form.label :password %></th>
+    <td><%= form.password_field :password %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :password_confirmation %></th>
+    <td><%= form.password_field :password_confirmation %></td>
+  </tr>
+</table>
+<% unless @member.new_record? %>
+<p>パスワードを変更しない時は、パスワード入力欄を空にしてください。</p>
+<% end %>

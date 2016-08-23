@@ -1,0 +1,28 @@
+<h1><%= @past_question.subject %></h1>
+
+<p><%= link_to "一覧に戻る", :past_questions %></p>
+<p><%= link_to "編集する", [:edit, @past_question] %></p>
+<p>
+  <ul>
+    <li>教授:<%= @past_question.teacher %></li>
+    <li>開講期:<%= @past_question.exam_date.term %></li>
+    <li>年度:<%= @past_question.exam_date.year %></li>
+    <li>タグ:
+      <% @past_question.tags.each do |tag| %>
+        ●<%= tag.name %>●<%= " " %>
+      <% end %>
+    </li>
+    <li>exam_date_id : <%= @past_question.exam_date_id %></li>
+    <% @past_question.tags.each do |tag| %>
+        <li>tag_id : <%= tag.id %></li>
+    <% end %>
+  </ul>
+</p>
+
+<p>イメージタグを埋め込む</p>
+
+<% if File.extname(@past_question.file_path) == ".pdf" %>
+  <embed src=<%= image_url(@past_question.file_path) %> type="application/pdf" width="100%" height="800px">
+<% else %>
+  <%= image_tag( image_url(@past_question.file_path), width: "80%", alt: "過去問の画像") %>
+<% end %>

@@ -1,0 +1,19 @@
+<h1>アップロード</h1>
+<p><%= flash.notice %></p>
+<%= form_for @past_question do |f| %>
+
+<%= render 'form', f: f %>
+
+<p>アップロード部分</p>
+<p>
+  <% if @date %>
+  <%= @date.year %>
+  <%= @date.term %>
+  <% else %>
+  名にもない
+  <% end %>
+<p>
+	<%= f.submit %>
+</p>
+
+<% end %>

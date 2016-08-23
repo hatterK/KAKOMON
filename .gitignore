@@ -1,16 +1,17 @@
 # Ignore bundler config.
-/.bundle
+.bundle
 
 # Ignore bundler gems.
 vendor/bundle
+vendor
 
 # Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
+Kakomon/db/*.sqlite3
+Kakomon/db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-/log/*.log
-/tmp
+Kakomon/log/*.log
+Kakomon/tmp
 
 # Ignore other unneeded files.
 doc/
@@ -20,3 +21,4 @@ doc/
 .DS_Store
 .idea
 .secret
+
