@@ -20,9 +20,9 @@ class MembersController < ApplicationController
   def create
     @member = Member.new(member_params)
     if @member.save
-      redirect_to @member, notice: "メンバーを追加しました。"
+      redirect_to @member, notice: "メンバーを追加しました。", status: :see_other
     else
-      render "new"
+      render "new", status: :unprocessable_entity
     end
   end
 
@@ -30,16 +30,16 @@ class MembersController < ApplicationController
     @member = Member.find(params[:id])
     @member.assign_attributes(member_params)
     if @member.save
-      redirect_to @member, notice: "メンバーの情報を更新しました。"
+      redirect_to @member, notice: "メンバーの情報を更新しました。", status: :see_other
     else
-      render "edit"
+      render "edit", status: :unprocessable_entity
     end
   end
 
   def destroy
     @member = Member.find(params[:id])
     @member.destroy
-    redirect_to :members, notice: "メンバーを削除しました。"
+    redirect_to :members, notice: "メンバーを削除しました。", status: :see_other
   end
 
   def member_params
