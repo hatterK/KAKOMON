@@ -114,7 +114,7 @@ class PastQuestion < ActiveRecord::Base
 
     def sort_by(param, is_desc = true)
       if is_desc
-        list = self.reverse_order(param)
+        list = self.order(param).reverse_order
       else
         list = self.order(param)
       end
