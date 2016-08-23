@@ -4,7 +4,7 @@ RSpec.describe "PastQuestions", type: :request do
   describe 'ステータスコードテスト' do
     let!(:past_question) do
       login Member.create(name: 'some_super_member', access_authority: 1, password: 'some_password')
-      exam_date = p ExamDate.create(year: rand(2011..2015), term: ['前期', '後期'].sample)
+      exam_date = ExamDate.create(year: rand(2011..2015), term: ['前期', '後期'].sample)
       PastQuestion.create(
         subject: '教育学', kana: 'きょういくがく', teacher: '小久保弘和',
         file_path: "#{Rails.root}/spec/test.pdf", added_time: Date.today, exam_date_id: exam_date.id,
