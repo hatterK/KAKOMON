@@ -40,9 +40,7 @@ class PastQuestion < ActiveRecord::Base
       ).where("teacher LIKE ?", "%#{query[:search_teacher]}%")
       if query[:search_year].present? || query[:search_term].present?
         list = list.joins(:exam_date)
-        if query[:search_year].present?
-          list = list.where("exam_dates.year = ?", query[:search_year])
-        end
+        list = list.where("exam_dates.year = ?", query[:search_year]) if query[:search_year].present?
         list = list.where("exam_dates.term LIKE ?","%#{query[:search_term]}%")
       end
       if query[:search_tag1].present? || query[:search_tag2].present? || query[:search_tag3].present?
@@ -52,7 +50,6 @@ class PastQuestion < ActiveRecord::Base
           .where("tags.name LIKE ?", "%#{query[:search_tag3]}%")
       end
       list = list.uniq
-      # list = list.order('exam_dates.year DESC')
       list
     end
 
