@@ -104,7 +104,7 @@ class PastQuestion < ActiveRecord::Base
       when 'views' then order(views: :desc)
       when 'subject' then order(:subject)
       when 'teacher' then order(:teacher)
-      else order(added_time: :desc)
+      else order(created_at: :desc)
       end
     end
   end

@@ -6,7 +6,6 @@ class CreatePastQuestions < ActiveRecord::Migration
       t.string :teacher
       t.string :file_path, null: false
       t.integer :views, null: false
-      t.date :added_time, null: false
 
       t.references :exam_date, null: false
 
