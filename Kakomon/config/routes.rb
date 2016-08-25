@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
-
   root 'past_questions#index'
 
   resources :past_questions do
-    collection { get "search", "sort" }
+    collection { get 'search', 'sort' }
     resources :tags, only: [:index, :show] do
-      collection { post "set_tag" }
-      member { get "untag" }
+      collection { post 'set_tag' }
+      member { get 'untag' }
     end
   end
 
   resources :exam_dates, only: [:index, :show] do
-    collection { get "search_by_term", "search_by_year" }
+    collection { get 'search_by_term', 'search_by_year' }
   end
 
   resources :tags, only: [:index, :show]

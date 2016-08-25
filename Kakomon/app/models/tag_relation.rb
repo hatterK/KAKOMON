@@ -1,5 +1,4 @@
 class TagRelation < ActiveRecord::Base
-
   belongs_to :past_question
   belongs_to :tag
 

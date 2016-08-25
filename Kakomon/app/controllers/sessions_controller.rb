@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     if member
       session[:member_id] = member.id
     else
-      flash.alert = "ユーザー名とパスワードが一致しません。"
+      flash.alert = 'ユーザー名とパスワードが一致しません。'
     end
     redirect_to :root
   end
@@ -13,5 +13,4 @@ class SessionsController < ApplicationController
     session.delete(:member_id)
     redirect_to :root
   end
-  
 end

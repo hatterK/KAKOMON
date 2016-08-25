@@ -10,11 +10,10 @@ class ExamDatesController < ApplicationController
   end
 
   def search_by_year
-    @exam_dates = ExamDate.search("year", params[:q])
+    @exam_dates = ExamDate.search(params[:q], '')
   end
 
   def search_by_term
-    @exam_dates = ExamDate.search("term", params[:q])
+    @exam_dates = ExamDate.search('', params[:q])
   end
-
 end

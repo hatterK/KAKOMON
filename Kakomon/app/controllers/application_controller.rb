@@ -6,38 +6,21 @@ class ApplicationController < ActionController::Base
   class Forbidden < StandardError; end
 
   private
+
   def current_member
     Member.find_by(id: session[:member_id]) if session[:member_id]
   end
   helper_method :current_member
 
-  private
   def editor_member
     member = current_member
-    if member
-      if member.access_authority < 3
-        member
-      else
-        nil
-      end
-    else
-      nil
-    end
+    member if member && member.access_authority < 3
   end
   helper_method :editor_member
 
-  private
   def super_member
     member = current_member
-    if member
-      if member.access_authority < 2
-        member
-      else
-        nil
-      end
-    else
-      nil
-    end
+    member if member && member.access_authority < 2
   end
   helper_method :super_member
 

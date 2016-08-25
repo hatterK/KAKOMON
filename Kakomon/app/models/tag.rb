@@ -7,19 +7,13 @@ class Tag < ActiveRecord::Base
 
   class << self
     def get_tag(name)
-      if self.exists?(name: name)
-        tag = self.find_by(name: name)
-        tag
+      if exists?(name: name)
+        find_by(name: name)
       else
-        tag = self.new(name: name, lock: false)
-        if tag.save
-          tag
-        else
-          nil
-        end
+        tag = new(name: name, lock: false)
+        return nil unless tag.save
+        tag
       end
     end
-
   end
-
 end
