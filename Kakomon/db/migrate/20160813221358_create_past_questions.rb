@@ -4,8 +4,8 @@ class CreatePastQuestions < ActiveRecord::Migration
       t.string :subject, null: false
       t.string :kana
       t.string :teacher
-      t.string :file_path, null: false
       t.integer :views, null: false
+      t.string :image, null: false
 
       t.references :exam_date, null: false
 

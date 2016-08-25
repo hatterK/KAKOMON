@@ -7,68 +7,27 @@ class PastQuestion < ActiveRecord::Base
   validates :subject, length: { maximum: 100 }
   validates :kana, length: { maximum: 100 }
   validates :teacher, length: { maximum: 20 }
-  validates :file_path, presence: true
-  validates :file_path, length: { maximum: 100 }
-  validates :added_time, presence: true
+  validates :image, presence: { on: create }
   validate :check_image
   validate :check_file_path
 
   attr_accessor :tag_name, :year, :term
   attr_accessor :search_subject, :search_teacher, :search_year, :search_term,
     :search_tag1, :search_tag2, :search_tag3, :sort_method
-  attr_reader :uploaded_image
-  # IMAGE_TYPES = ["jpg", "png", "pdf"]
-  # mount_uploader :file_path, PastQuestion
 
-  def uploaded_image=(image)
-    @extension = convert_content_type(image.content_type)
-    @data = image.read
-    file_name = File.basename(image.original_filename, '.*')
-    path_p = Rails.root.join('app/assets/images', @extension)
-    path = path_p + "#{file_name}.#{@extension}"
-
-    if FileTest.exists?(path)
-      num = 0
-      begin
-        num += 1
-        path = path_p + "#{file_name}#{num}.#{@extension}"
-      end while FileTest.exists?(path)
-    end
-
-    open(path, 'wb') do |output|
-      output.write(@data)
-    end
-    self.file_path = "#{@extension}/" + File.basename(path)
-    @uploaded_image = image
-  end
+  mount_uploader :image, ImageUploader
 
   private
 
-  def convert_content_type(ctype)
-    ctype = ctype.rstrip.downcase
-    case ctype
-    when 'image/pjepg' then 'jpg'
-    when 'image/jpg' then 'jpg'
-    when 'image/x-png' then 'png'
-    when 'image/jpeg' then 'jpg'
-    when 'image/png' then 'png'
-    when %r{.*application/pdf.*} then 'pdf'
-    end
-  end
-
   def check_image
-    errors.add(:uploaded_image, 'too_big_image') if @uploaded_image && @data.size > 3.megabytes
+    errors.add(:image, 'too_big_image') if image && image.size > 3.megabytes
   end
 
   def check_file_path
-    if file_path
-      content_type = File.extname(file_path)
-      path = Rails.root.join('app/assets/images', file_path)
-      validness = content_type =~ /[jJ][pP].?[gG]\z|[pP][nN][gG]\z|[pP][dD][fF]\z/
-      errors.add(:file_path, 'invalid_image') unless validness
-      errors.add(:file_path, 'file_not_exist') unless File.exist?(path)
+    if image
+      errors.add(:image, 'image_not_exist') unless File.exist?(image.current_path)
     else
-      errors.add(:file_path, 'file_not_exist')
+      errors.add(:image, 'image_not_exist')
     end
   end
 

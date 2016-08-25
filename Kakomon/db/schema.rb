@@ -32,9 +32,8 @@ ActiveRecord::Schema.define(version: 20160820222252) do
     t.string   "subject",      null: false
     t.string   "kana"
     t.string   "teacher"
-    t.string   "file_path",    null: false
     t.integer  "views",        null: false
-    t.date     "added_time",   null: false
+    t.string   "image",        null: false
     t.integer  "exam_date_id", null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
