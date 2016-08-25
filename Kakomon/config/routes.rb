@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'past_questions#index'
 
   resources :past_questions do
-    collection { get 'search', 'sort' }
+    collection { get 'search' }
     resources :tags, only: [:index, :show] do
       collection { post 'set_tag' }
       member { get 'untag' }

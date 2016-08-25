@@ -12,11 +12,6 @@ class PastQuestionsController < ApplicationController
     render :index
   end
 
-  def sort
-    @past_questions = PastQuestion.sort_by(params[:q])
-    render :index
-  end
-
   def show
     @past_question = PastQuestion.find(params[:id])
     @past_question.views = @past_question.views + 1
