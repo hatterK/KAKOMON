@@ -34,9 +34,9 @@ class PastQuestionsController < ApplicationController
     set_exam_date_and_tag
     if @past_question.save! # エラーを見るために！をつけている。後で外す
       @past_question.tags << @tag if @tag
-      redirect_to @past_question, notice: '過去問を追加しました。'
+      redirect_to @past_question, notice: "過去問を追加しました。", status: :see_other
     else
-      redirect_to :past_questions, notice: '追加に失敗'
+      redirect_to :past_questions, notice: "追加に失敗", status: :see_other # TODO: ここ成功時とステータスコード同じなのどうにかしたい
       # render "new"
     end
   end
@@ -47,16 +47,16 @@ class PastQuestionsController < ApplicationController
     set_exam_date_and_tag
     @past_question.tags << @tag if @tag                              # 過去問データにタグ付け
     if @past_question.save! # エラーを見るためにつけている。あとで外す。
-      redirect_to @past_question, notice: '過去問の情報を編集しました。'
+      redirect_to @past_question, notice: "過去問の情報を編集しました。", status: :see_other
     else
-      render 'edit', notice: '情報の編集に失敗'
+      render "edit", notice: "情報の編集に失敗", status: :unprocessable_entity
     end
   end
 
   def destroy
     @past_question = PastQuestion.find(params[:id])
     @past_question.destroy
-    redirect_to :past_questions
+    redirect_to :past_questions, status: :see_other
   end
 
   private
