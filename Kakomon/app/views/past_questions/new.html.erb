@@ -4,14 +4,6 @@
 
 <%= render 'form', f: f %>
 
-<p>アップロード部分</p>
-<p>
-  <% if @date %>
-  <%= @date.year %>
-  <%= @date.term %>
-  <% else %>
-  名にもない
-  <% end %>
 <p>
 	<%= f.submit %>
 </p>
