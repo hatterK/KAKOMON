@@ -19,7 +19,7 @@ class PastQuestionsController < ApplicationController
   end
 
   def new
-    @past_question = PastQuestion.new(added_time: Time.current)
+    @past_question = PastQuestion.new
   end
 
   def edit
