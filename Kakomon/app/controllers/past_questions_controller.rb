@@ -5,10 +5,12 @@ class PastQuestionsController < ApplicationController
 
   def index
     @past_questions = PastQuestion.order(:id)
+      .paginate(page: params[:page], per_page: 15)
   end
 
   def search
-    @past_questions = PastQuestion.search(search_params).sort_by(params[:sort_method])
+    @past_questions = PastQuestion.search(search_params)
+      .sort_by(params[:sort_method]).paginate(page: params[:page], per_page: 15)
     render :index
   end
 
