@@ -3,7 +3,7 @@ class TagsController < ApplicationController
   before_action :editor_login_required, only: [:untag]
 
   def index
-    @tags = Tag.order('name')
+    @tags = Tag.order('name').paginate(page: params[:page], per_page: 15)
   end
 
   def show
