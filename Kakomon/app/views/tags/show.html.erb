@@ -32,7 +32,7 @@
           <%= link_to tag.name, tag %>
         <% end %>
       </td>
-      <td><%= past_question.added_time %></td>
+      <td><%= past_question.created_at %></td>
     <% if editor_member %>
       <td><%= link_to "編集", [:edit, past_question], class:'btn btn-default btn-sm' %>
         <% if super_member %>
