@@ -19,6 +19,10 @@ Rails.application.routes.draw do
 
   resource :session, only: [:create, :destroy]
 
+  get 'bad_request' => 'error#bad_request'
+  get 'internal_server_error' => 'error#internal_server_error'
+  match "*anything" => 'error#not_found', via: [:get, :post, :patch, :delete]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
