@@ -55,8 +55,8 @@ class PastQuestion < ActiveRecord::Base
 
     def sort_by(sort_method)
       case sort_method
-      when 'year_desc' then order('exam_dates.year DESC')
-      when 'year_asce' then order('exam_dates.year')
+      when 'year_desc' then joins(:exam_date).order('exam_dates.year DESC')
+      when 'year_asce' then joins(:exam_date).order('exam_dates.year')
       when 'views' then order(views: :desc)
       when 'subject' then order(:subject)
       when 'teacher' then order(:teacher)
