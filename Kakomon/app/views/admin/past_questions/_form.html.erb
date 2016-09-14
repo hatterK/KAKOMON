@@ -1,4 +1,3 @@
-
 <table>
   <tr>
   	<th width="100"><%= f.label :科目名 %></th>
@@ -20,11 +19,7 @@
   	<th><%= f.label :開講期 %></th>
   	<td>
       <% f.text_field :term %>
-      <%= f.select :term, [["前期","first_term"],["後期", "latter_term"],["通年", "all_term"],["前期集中","first_c"],["後期集中", "latter_c"]] %></td>
-  </tr>
-  <tr>
-    <th><%= f.label :ファイルアップロード %></th>
-    <td><%= f.file_field :image %></td>
+      <%= f.select :term, [["前期","first_semester"],["後期", "second_semester"],["通年", "year_round"],["前期集中","intensive_first_semester"],["後期集中", "intensive_second_semester"]] %></td>
   </tr>
   <tr>
     <th><%= f.label :タグの追加 %></th>

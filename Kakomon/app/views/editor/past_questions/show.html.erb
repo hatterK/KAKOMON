@@ -1,6 +1,8 @@
 <h1><%= @past_question.subject %></h1>
+<p><%= flash.notice %></p>
 
-<p><%= link_to "過去問サイトのトップ", :past_questions %></p>
+<p><%= link_to "編集者ページのトップへ戻る", :editor_past_questions %></p>
+<p><%= link_to "編集する", [:edit, :editor, @past_question] %></p>
 <p>
   <ul>
     <li>教授:<%= @past_question.teacher %></li>
@@ -17,7 +19,7 @@
     <% end %>
   </ul>
 </p>
-<p><%= form_tag [:set_tag, @past_question, :tags] %>
+<p><%= form_tag [:set_tag, :editor, @past_question, :tags] %>
   <%= text_field_tag "name", params[:name] %>
   <%= submit_tag "タグを追加" %>
 </p>

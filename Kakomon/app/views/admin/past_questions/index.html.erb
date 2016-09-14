@@ -1,10 +1,6 @@
-<h1>過去問データベース</h1>
-<% if editor_member %>
-    <span><%= link_to "編集者ページ", :editor_root %></span>
-  <% if super_member %>
-    <span><%= link_to "管理者ページ", :admin_root %></span>
-  <% end %>
-<% end %>
+<h1>過去問データベース　管理者ページ</h1>
+<p><%= link_to "ユーザーアカウント一覧", :admin_members %></p>
+<p><%= link_to "アップロード", :new_admin_past_question, class:'btn btn-primary pull-right' %></p>
 <p><%= flash.notice %></p>
 <br><br>
 
@@ -14,10 +10,10 @@ font-size: large;
 }
 </style>
 
-<p><%= link_to "トップへ戻る", :past_questions %></p>
+<p><%= link_to "過去問サイトのトップへ戻る", :past_questions %></p>
 
 <% if current_member %>
-  <%= form_tag :search_past_questions, method: :get do %>
+  <%= form_tag :search_admin_past_questions, method: :get do %>
     <table>
       <tr>
         <th>教科名　：　</th>
@@ -68,21 +64,26 @@ font-size: large;
           <th>閲覧数</th>
           <th>タグ</th>
           <th>追加日時</th>
+          <th>編集・削除</th>
         </tr>
       </thead>
     <% @past_questions.each do |past_question| %>
       <tbody>
-  	    <td><%= link_to past_question.subject, past_question %></td>
+  	    <td><%= link_to past_question.subject, [:admin, past_question] %></td>
   	    <td><%= past_question.teacher %></td>
   	    <td><%= past_question.exam_date.term %></td>
   	    <td><%= past_question.exam_date.year %></td>
         <td><%= past_question.views %></td>
   	    <td>
           <% past_question.tags.each do |tag| %>
-            <%= link_to tag.name, tag %>
+            <%= link_to tag.name, [:admin, tag] %>
           <% end %>
         </td>
         <td><%= past_question.created_at %></td>
+  	    <td><%= link_to "編集", [:edit, :admin, past_question], class:'btn btn-default btn-sm' %>
+  	        <%= link_to "削除", [:admin, past_question], method: :delete,
+              data: {confirm: "本当に削除しますか?" }, class:'btn btn-danger btn-sm' %>
+        </td>
       </tbody>
     <% end %>
     </table>

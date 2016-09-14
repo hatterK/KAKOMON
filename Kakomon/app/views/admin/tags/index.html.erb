@@ -1,5 +1,7 @@
 <h1>過去問データベース</h1>
-<p><%= link_to '過去問サイトのトップ', :root %></p>
+<p><%= flash.notice %></p>
+
+<p><%= link_to '管理ページのトップへ戻る', :admin_root %></p>
 <h2>タグの一覧</h2>
 
 <div class="container">
@@ -13,7 +15,7 @@
     </thead>
   <% @tags.each do |tag| %>
     <tbody>
-	    <td><%= link_to tag.name, tag %></td>
+	    <td><%= link_to tag.name, [:admin, tag] %></td>
 	    <td><%= tag.past_questions.count %></td>
       <td><%= tag.created_at %></td>
     </tbody>

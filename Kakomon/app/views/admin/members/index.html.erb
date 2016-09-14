@@ -1,0 +1,30 @@
+<% @page_title = "メンバーの一覧" %>
+<h1><%= @page_title %></h1>
+<p><%= link_to "管理ページのトップへ戻る", :admin_root %>
+
+<p><%= link_to "メンバーの追加", :new_admin_member %></p>
+
+  <% if flash.alert %><p><%= flash.alert %></p><% end %>
+<p><%= current_member.name%>さん　｜　<%= link_to "logout", :session,
+  method: :delete, data: { confirm: "ログアウトしますか？" } %></p>
+
+<% if @members.present? %>
+<table>
+  <tr>
+    <th>ユーザー名</th>
+    <th>操作</th>
+  </tr>
+  <% @members.each do |member| %>
+  <tr>
+    <td><%= link_to member.name, [:admin, member] %></td>
+    <td>
+      <%= link_to "編集", [:edit, :admin, member] %>
+      <%= link_to "削除", [:admin, member], method: :delete,
+            data: { confirm: "本当に削除しますか？"} %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<% else %>
+<p>ユーザーアカウントがありません</p>
+<% end %>

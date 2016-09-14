@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
   root 'past_questions#index'
 
-  resources :past_questions do
+  resources :past_questions, only: [:index, :show] do
     collection { get 'search' }
-    resources :tags, only: [:index, :show] do
+    resources :tags, only: [] do
       collection { post 'set_tag' }
-      member { get 'untag' }
     end
   end
 
@@ -15,9 +14,34 @@ Rails.application.routes.draw do
 
   resources :tags, only: [:index, :show]
 
-  resources :members
+  resources :members, only: [:index]
 
   resource :session, only: [:create, :destroy]
+
+  namespace :editor do
+    root to: "past_questions#index"
+    resources :past_questions, exept: :destroy do
+      collection { get 'search' }
+      resources :tags, only: [] do
+        collection { post 'set_tag' }
+        member { get 'untag' }
+      end
+    end
+    resources :tags, only: [:index, :show]
+  end
+
+  namespace :admin do
+    root to: "past_questions#index"
+    resources :past_questions do
+      collection { get 'search' }
+      resources :tags, only: [] do
+        collection { post 'set_tag' }
+        member { get 'untag' }
+      end
+    end
+    resources :tags, only: [:index, :show]
+    resources :members
+  end
 
   get 'bad_request' => 'error#bad_request'
   get 'internal_server_error' => 'error#internal_server_error'

@@ -1,7 +1,8 @@
 <h1>編集</h1>
+<p><%= flash.notice %></p>
 
 <h2><%= @past_question.subject %></h2>
-<%= form_for @past_question do |f| %>
+<%= form_for [:editor, @past_question] do |f| %>
 
 <%= render 'form', f: f %>
 
@@ -9,7 +10,7 @@
 <% @past_question.tags.each do |tag| %>
   <tr>
     <th><%= tag.name %></th>
-    <td><%= link_to "削除", [:untag, @past_question, tag] %></td>
+    <td><%= link_to "削除", [:untag, :editor, @past_question, tag] %></td>
   </tr>
 <% end %>
 </table>

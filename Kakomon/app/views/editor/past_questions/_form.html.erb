@@ -1,0 +1,29 @@
+
+<table>
+  <tr>
+  	<th width="100"><%= f.label :科目名 %></th>
+  	<td><%= f.text_field :subject %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :科目名ふりがな %></th>
+    <td><%= f.text_field :kana %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label :教授 %></th>
+  	<td><%= f.text_field :teacher %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label :年度 %></th>
+  	<td><%= f.text_field :year %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label :開講期 %></th>
+  	<td>
+      <% f.text_field :term %>
+      <%= f.select :term, [["前期","first_term"],["後期", "latter_term"],["通年", "all_term"],["前期集中","first_c"],["後期集中", "latter_c"]] %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :タグの追加 %></th>
+    <td><%= f.text_field :tag_name %></td>
+  </tr>
+</table>

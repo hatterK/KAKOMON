@@ -1,0 +1,15 @@
+<h1>アップロード</h1>
+<p><%= flash.notice %></p>
+<%= form_for [:editor, @past_question] do |f| %>
+
+<%= render 'form', f: f %>
+
+<tr>
+  <th><%= f.label :ファイルアップロード %></th>
+  <td><%= f.file_field :image %></td>
+</tr>
+<p>
+	<%= f.submit %>
+</p>
+
+<% end %>

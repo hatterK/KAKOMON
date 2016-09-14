@@ -39,14 +39,6 @@ class ApplicationController < ActionController::Base
     raise Forbidden unless current_member
   end
 
-  def editor_login_required
-    raise Forbidden unless editor_member
-  end
-
-  def super_login_required
-    raise Forbidden unless super_member
-  end
-
   def rescue_400(exception)
     render "errors/bad_request", status: 400, layout: 'error', formats: [:html]
   end
