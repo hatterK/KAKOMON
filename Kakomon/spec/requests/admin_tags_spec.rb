@@ -11,23 +11,29 @@ RSpec.describe "Tags", type: :request do
     end
 
     before do
-      login Member.create(name: 'some_user_name', password: 'some_password', password_confirmation: 'some_password', access_authority: 3)
+      login Member.create(name: 'some_admin_name', password: 'some_password', password_confirmation: 'some_password', access_authority: 1)
     end
 
-    it 'index' do
+    it 'admin_index' do
       get tags_path
 
       expect(response).to have_http_status(:ok)
     end
 
-    it 'show' do
+    it 'admin_show' do
       get (tag_path id: tag.id)
 
       expect(response).to have_http_status(:ok)
     end
 
-    it 'set_tag' do
-      post (set_tag_past_question_tags_path past_question_id: past_question.id), { name: 'tag_name' }
+    it 'admin_set_tag' do
+      post (set_tag_admin_past_question_tags_path past_question_id: past_question.id), { name: 'tag_name' }
+
+      expect(response).to have_http_status(:see_other)
+    end
+
+    it 'admin_untag' do
+      get (untag_admin_past_question_tag_path past_question_id: past_question.id, id: tag.id)
 
       expect(response).to have_http_status(:see_other)
     end

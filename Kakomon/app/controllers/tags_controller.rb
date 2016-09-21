@@ -13,6 +13,6 @@ class TagsController < ApplicationController
     @past_question = PastQuestion.find(params[:past_question_id])
     new_tag = Tag.get_tag(params[:name])
     @past_question.tags << new_tag
-    redirect_to @past_question, notice: 'タグを追加しました。'
+    redirect_to @past_question, notice: 'タグを追加しました。', status: :see_other
   end
 end

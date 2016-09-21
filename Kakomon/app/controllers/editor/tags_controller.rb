@@ -11,12 +11,12 @@ class Editor::TagsController < Editor::Base
     @past_question = PastQuestion.find(params[:past_question_id])
     new_tag = Tag.get_tag(params[:name])
     @past_question.tags << new_tag
-    redirect_to [:editor, @past_question], notice: 'タグを追加しました。'
+    redirect_to [:editor, @past_question], notice: 'タグを追加しました。', status: :see_other
   end
 
   def untag
     @past_question = PastQuestion.find(params[:past_question_id])
     @past_question.tags.destroy(Tag.find(params[:id]))
-    redirect_to [:editor, @past_question], notice: 'タグを削除しました。'
+    redirect_to [:editor, @past_question], notice: 'タグを削除しました。', status: :see_other
   end
 end
