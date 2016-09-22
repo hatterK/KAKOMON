@@ -24,7 +24,7 @@ class PastQuestion < ActiveRecord::Base
   end
 
   def check_file_path
-    if image
+    if image && image.current_path
       errors.add(:image, 'image_not_exist') unless File.exist?(image.current_path)
     else
       errors.add(:image, 'image_not_exist')
