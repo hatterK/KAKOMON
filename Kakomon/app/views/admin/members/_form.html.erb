@@ -3,14 +3,12 @@
     <th><%= form.label :name, "ユーザー名" %></th>
     <td><%= form.text_field :name %></td>
   </tr>
-<% if controller.kind_of?(MembersController) %>
   <tr>
     <th><%= form.label :access_authority, "アクセス権限" %></th>
     <td>
       <%= form.select :access_authority, [["一般ユーザー", 3],["編集者", 2],["管理者", 1]] %>
     </td>
   </tr>
-<% end %>
   <tr>
     <th><%= form.label :password %></th>
     <td><%= form.password_field :password %></td>
