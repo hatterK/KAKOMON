@@ -1,0 +1,17 @@
+<h1>試験日時の詳細情報</h1>
+<% if flash.notice %>
+  <p><%= flash.notice %></p>
+<% end %>
+
+<p><%= link_to '試験日時の一覧に戻る', :admin_exam_dates %></p>
+
+<p><%= link_to '編集', [:edit, :admin, @exam_date] %></p>
+<p><%= link_to '削除', [:admin, @exam_date], method: :delete,
+        data: {confirm: "削除すると、関連する過去問全てに影響が生じます。\n本当に削除しますか?" } %></p>
+
+<ul>
+  <li>年度　　：　<%= @exam_date.year %></li>
+  <li>開講期　：　<%= @exam_date.term %></li>
+  <li>過去問数：　<%= @exam_date.past_questions.count %></li>
+  <li>作成日時：　<%= @exam_date.created_at %></li>
+</ul>

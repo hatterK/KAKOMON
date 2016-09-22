@@ -20,6 +20,8 @@ class ExamDate < ActiveRecord::Base
       if year_q.present? || term_q.present?
         list = order(:id)
         list.where('year LIKE ?', "%#{year_q}%").where('term LIKE ?', "%#{term_q}%")
+      else
+        order(:id)
       end
     end
   end

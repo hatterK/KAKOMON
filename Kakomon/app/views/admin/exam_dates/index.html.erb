@@ -1,0 +1,59 @@
+<h1>試験日時の一覧</h1>
+<% if flash.notice %>
+<p><%= flash.notice %></p>
+<% end %>
+
+<p><%= link_to "管理者ページのトップへ戻る", :admin_root %></p>
+
+<p><%= link_to '試験日時の追加', :new_admin_exam_date %></p>
+
+<style>
+div{
+font-size: large;
+}
+</style>
+
+<%= form_tag :search_admin_exam_dates, method: :get do %>
+  <table>
+    <tr>
+      <th>年度　：　</th>
+      <td><%= text_field_tag "search_year", params[:search_year] %></td>
+    </tr>
+    <tr>
+      <th>開講期　：　</th>
+      <td><%= text_field_tag "search_term", params[:search_term] %></td>
+    </tr>
+    <tr>
+      <td><%= submit_tag "検索" %></td>
+    </tr>
+  </table>
+<% end %>
+
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th></th>
+        <th>年度</th>
+        <th>開講期</th>
+        <th>過去問数</th>
+        <th>追加日時</th>
+        <th>編集・削除</th>
+      </tr>
+    </thead>
+  <% @exam_dates.each do |exam_date| %>
+    <tbody>
+	    <td><%= link_to '◯', [:admin, exam_date] %></td>
+      <td><%= exam_date.year %></td>
+	    <td><%= exam_date.term %></td>
+	    <td><%= exam_date.past_questions.count %></td>
+      <td><%= exam_date.created_at %></td>
+	    <td><%= link_to "編集", [:edit, :admin, exam_date], class:'btn btn-default btn-sm' %>
+	        <%= link_to "削除", [:admin, exam_date], method: :delete,
+            data: {confirm: "削除すると、関連する過去問全てに影響が生じます。\n本当に削除しますか?" }, class:'btn btn-danger btn-sm' %>
+      </td>
+    </tbody>
+  <% end %>
+  </table>
+  <%= will_paginate @exam_dates %>
+</div>

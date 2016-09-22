@@ -1,0 +1,12 @@
+<table>
+  <tr>
+  	<th width="100"><%= form.label :年度 %></th>
+  	<td><%= form.text_field :year %></td>
+  </tr>
+  <tr>
+  	<th><%= form.label :開講期 %></th>
+  	<td>
+      <% form.text_field :term %>
+      <%= form.select :term, [["前期","first_semester"],["後期", "second_semester"],["通年", "year_round"],["前期集中","intensive_first_semester"],["後期集中", "intensive_second_semester"]] %></td>
+  </tr>
+</table>

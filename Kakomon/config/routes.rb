@@ -8,10 +8,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :exam_dates, only: [:index, :show] do
-    collection { get 'search_by_term', 'search_by_year' }
-  end
-
   resources :tags, only: [:index, :show]
 
   resources :members, only: [:index]
@@ -38,6 +34,9 @@ Rails.application.routes.draw do
         collection { post 'set_tag' }
         member { get 'untag' }
       end
+    end
+    resources :exam_dates do
+      collection { get 'search' }
     end
     resources :tags, only: [:index, :show]
     resources :members
