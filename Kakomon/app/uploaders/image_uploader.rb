@@ -14,7 +14,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     # default : "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-    Rails.root.join("app/assets/images/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}")
+    Rails.root.join("db/carrierwave/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}")
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
