@@ -23,10 +23,10 @@
   <%= submit_tag "タグを追加" %>
 </p>
 
-<p><%= image_path %></p>
+<p><%= @past_question.image.current_path%></p>
 
-<% if File.extname(image_path) == ".pdf" %>
-  <embed src=<%= image_url(image_path) %> type="application/pdf" width="100%" height="800px">
+<% if File.extname(@past_question.image.current_path) == '.pdf' %>
+  <object data="<%= base64_image_data %>" width="100%" height="800px" alt="過去問の画像"></object>
 <% else %>
-  <%= image_tag( image_url(image_path), width: "80%", alt: "過去問の画像") %>
+  <object data="<%= base64_image_data %>" width="80%" height="" alt="過去問の画像"></object>
 <% end %>
