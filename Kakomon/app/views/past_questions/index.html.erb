@@ -1,92 +1,47 @@
-<h1>過去問データベース</h1>
-<% if editor_member %>
-    <span><%= link_to "編集者ページ", :editor_root %></span>
-  <% if super_member %>
-    <span><%= link_to "管理者ページ", :admin_root %></span>
-  <% end %>
-<% end %>
-<p><%= flash.notice %></p>
-<br><br>
-
-<style>
-div{
-font-size: large;
-}
-</style>
-
-<p><%= link_to "トップへ戻る", :past_questions %></p>
-
-<% if current_member %>
-  <%= form_tag :search_past_questions, method: :get do %>
-    <table>
-      <tr>
-        <th>教科名　：　</th>
-        <td><%= text_field_tag "search_subject", params[:search_subject] %></td>
-      </tr>
-      <tr>
-        <th>教師　：　</th>
-        <td><%= text_field_tag "search_teacher", params[:search_teacher] %></td>
-      </tr>
-      <tr>
-        <th>年度　：　</th>
-        <td><%= text_field_tag "search_year", params[:search_year] %></td>
-      </tr>
-      <tr>
-        <th>開講期　：　</th>
-        <td><%= text_field_tag "search_term", params[:search_term] %></td>
-      </tr>
-      <tr>
-        <th>タグ名　：　</th>
-        <td><%= text_field_tag "search_tag1", params[:search_tag1] %></td>
-      </tr>
-      <tr>
-        <th>タグ名　：　</th>
-        <td><%= text_field_tag "search_tag2", params[:search_tag2] %></td>
-      </tr>
-      <tr>
-        <th>タグ名　：　</th>
-        <td><%= text_field_tag "search_tag3", params[:search_tag3] %></td>
-      </tr>
-      <tr>
-        <th>ソート方法　：　</th>
-        <td><%= text_field_tag "sort_method", params[:sort_method] %></td>
-      </tr>
-      <tr>
-        <td><%= submit_tag "検索" %></td>
-      </tr>
-    </table>
-  <% end %>
-
-  <div class="container">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>科目名</th>
-          <th>教授</th>
-          <th>開講期</th>
-          <th>年度</th>
-          <th>閲覧数</th>
-          <th>タグ</th>
-          <th>追加日時</th>
-        </tr>
-      </thead>
-    <% @past_questions.each do |past_question| %>
-      <tbody>
-  	    <td><%= link_to past_question.subject, past_question %></td>
-  	    <td><%= past_question.teacher %></td>
-  	    <td><%= past_question.exam_date.term %></td>
-  	    <td><%= past_question.exam_date.year %></td>
-        <td><%= past_question.views %></td>
-  	    <td>
-          <% past_question.tags.each do |tag| %>
-            <%= link_to tag.name, tag %>
-          <% end %>
-        </td>
-        <td><%= past_question.created_at %></td>
-      </tbody>
-    <% end %>
+<div class="container">
+    <% if current_member %>
+      <div class="jumbotron">
+        <div class="container">
+          <h1>過去問データベース</h1>
+          <br>
+          <p>過去問データベースを利用する際には、過去問を寮外へと持ち出さない点に十分注意してください。</p>
+          <p>過去問が流出し、過去問データベースを停止することにならないように協力をお願いします。</p>
+          <p><a class="btn btn-primary btn-lg" href="<%= search_past_questions_path %>" role="button">過去問データベースを検索 &raquo;</a></p>
+        </div>
+      </div>
+      <% if flash.notice %><p><%= flash.notice %></p><% end %>
+      <h2>最近追加された過去問</h2>
+      <table class="table table-hover table-striped">
+        <thead class="thead-inverse">
+          <tr>
+            <th>科目名</th>
+            <th>教授</th>
+            <th>開講期</th>
+            <th>年度</th>
+            <th>閲覧数</th>
+            <th>タグ</th>
+          </tr>
+        </thead>
+      <% @past_questions.each do |past_question| %>
+        <tbody>
+          <tr>
+            <th scope="row"><%= link_to past_question.subject, past_question %></th>
+            <td><%= past_question.teacher %></td>
+            <td><%= japanese_term( past_question.exam_date.term ) %></td>
+            <td><%= past_question.exam_date.year %></td>
+            <td><%= past_question.views %></td>
+            <td>
+              <% past_question.tags.each do |tag| %>
+                <%= link_to tag.name, tag %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      <% end %>
     </table>
     <%= will_paginate @past_questions %>
-  </div>
-
-<% end %>
+  <% else %>
+    <h1>過去問データベース</h1>
+    <% if flash.notice %><p><%= flash.notice %></p><% end %>
+  <% end %>
+</div>

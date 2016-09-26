@@ -1,26 +1,27 @@
-<% @page_title = "ログイン操作" %>
-<h1><%= @page_title %></h1>
-<p><%= link_to "過去問サイトのトップへ戻る", :root %>
-
-<% unless current_member %>
+<div class="container">
+  <% @page_title = "ログイン" %>
   <% if flash.alert %><p><%= flash.alert %></p><% end %>
+  <% if flash.notice %><p><%= flash.notice %></p><% end %>
 
-  <%= form_tag :session do %>
-    <table>
-      <tr>
-        <td>ユーザー名</td>
-        <td><%= text_field_tag "name", "", style: "width: 120px" %></td>
-      </tr>
-      <tr>
-        <td>パスワード</td>
-        <td><%= password_field_tag "password", "", style: "width: 120px" %></td>
-      </tr>
-      <tr>
-        <td><%= submit_tag "login" %></td>
-      </tr>
-    </table>
+  <% unless current_member %>
+    <%= form_tag :session, class: "form-signin" do %>
+      <h2 class="form-signin-heading"><%= @page_title %></h2>
+      <table>
+        <tr>
+          <td>ユーザー名</td>
+          <td><%= text_field_tag "name", "", style: "width: 120px", class: "form-control"%></td>
+        </tr>
+        <tr>
+          <td>パスワード</td>
+          <td><%= password_field_tag "password", "", style: "width: 120px", class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= submit_tag "login", class: "btn btn-lg btn-primary btn-block" %></td>
+        </tr>
+      </table>
+    <% end %>
+  <% else %>
+    <p><%= current_member.name%>さん　｜　<%= link_to "ログアウト", :session,
+      method: :delete, data: { confirm: "ログアウトしますか？" } %></p>
   <% end %>
-<% else %>
-  <p><%= current_member.name%>さん　｜　<%= link_to "logout", :session,
-    method: :delete, data: { confirm: "ログアウトしますか？" } %></p>
-<% end %>
+</div>

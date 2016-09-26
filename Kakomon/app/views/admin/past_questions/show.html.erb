@@ -1,4 +1,7 @@
 <h1><%= @past_question.subject %></h1>
+<% if flash.notice %>
+  <p><%= flash.notice %></p>
+<% end %>
 
 <p><%= link_to "管理者ページのトップ", :admin_past_questions %></p>
 <p><%= link_to "編集する", [:edit, :admin, @past_question] %></p>

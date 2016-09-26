@@ -1,21 +1,28 @@
-<h1>過去問データベース</h1>
-<p><%= link_to '過去問サイトのトップ', :root %></p>
-<h2>タグの一覧</h2>
-
 <div class="container">
+  <% @page_title = "タグの一覧" %>
+  <h1><%= @page_title %></h1>
+  <% if flash.notice %><p><%= flash.notice %></p><% end %>
+  <%= form_tag :search_tags, method: :get do %>
+    <table>
+      <tr>
+        <th>タグ名　：　</th>
+        <td><%= text_field_tag "name", params[:name] %></td>
+        <td><%= submit_tag "検索" %></td>
+      </tr>
+    </table>
+  <% end %>
+  <br>
   <table class="table table-hover">
     <thead>
       <tr>
         <th>タグ名</th>
         <th>過去問数</th>
-        <th>作成日時</th>
       </tr>
     </thead>
   <% @tags.each do |tag| %>
     <tbody>
-	    <td><%= link_to tag.name, tag %></td>
-	    <td><%= tag.past_questions.count %></td>
-      <td><%= tag.created_at %></td>
+      <td><%= link_to tag.name, tag %></td>
+      <td><%= tag.past_questions.count %></td>
     </tbody>
   <% end %>
   </table>

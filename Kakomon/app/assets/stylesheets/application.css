@@ -13,3 +13,26 @@
  *= require_tree .
  *= require_self
  */
+
+body.show {
+  padding-top: 0px;
+  padding-bottom: 50px;
+}
+
+body {
+  padding-top: 70px;
+  padding-bottom: 50px;
+}
+
+div {
+  font-size: large;
+}
+
+.table .thead-inverse {
+  color: #2a2f36;
+  background-color: #73a8f0;
+}
+
+div.jumbotron h1 {
+  font-size: 40px;
+}

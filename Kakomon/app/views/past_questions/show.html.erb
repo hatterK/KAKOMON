@@ -1,29 +1,41 @@
-<h1><%= @past_question.subject %></h1>
+<div class="container container-show">
+  <% @page_title = @past_question.subject %>
+  <h1><%= @page_title %></h1>
+  <% if flash.notice %><p><%= flash.notice %></p><% end %>
 
-<p><%= link_to "過去問サイトのトップ", :past_questions %></p>
-<p>
-  <ul>
-    <li>教授:<%= @past_question.teacher %></li>
-    <li>開講期:<%= @past_question.exam_date.term %></li>
-    <li>年度:<%= @past_question.exam_date.year %></li>
-    <li>タグ:
-      <% @past_question.tags.each do |tag| %>
-        ●<%= tag.name %>●<%= " " %>
-      <% end %>
-    </li>
-    <li>exam_date_id : <%= @past_question.exam_date_id %></li>
-    <% @past_question.tags.each do |tag| %>
-        <li>tag_id : <%= tag.id %></li>
-    <% end %>
-  </ul>
-</p>
-<p><%= form_tag [:set_tag, @past_question, :tags] %>
-  <%= text_field_tag "name", params[:name] %>
-  <%= submit_tag "タグを追加" %>
-</p>
+  <table>
+    <tr>
+      <th width="100px">教授:</th>
+      <td><%= @past_question.teacher %></td>
+    </tr>
+    <tr>
+      <th>開講期:</th>
+      <td><%= @past_question.exam_date.term %></td>
+    </tr>
+    <tr>
+      <th>年度:</th>
+      <td><%= @past_question.exam_date.year %></td>
+    </tr>
+    <tr>
+      <th>タグ:</th>
+      <td>
+        <ul>
+          <% @past_question.tags.each do |tag| %>
+            <li><%= tag.name %></li>
+          <% end %>
+        </ul>
+      <td>
+    </tr>
+  </table>
 
-<% if File.extname(@past_question.image_url) == '.pdf' %>
-  <object data="<%= base64_image_data %>" width="100%" height="800px" alt="過去問の画像"></object>
-<% else %>
-  <object data="<%= base64_image_data %>" width="80%" height="" alt="過去問の画像"></object>
-<% end %>
+  <p><%= form_tag [:set_tag, @past_question, :tags] %>
+    <%= text_field_tag "name", params[:name] %>
+    <%= submit_tag "タグを追加" %>
+  </p>
+
+  <% if File.extname(@past_question.image_url) == '.pdf' %>
+    <object data="<%= base64_image_data %>" width="100%" height="800px" alt="過去問の画像"></object>
+  <% else %>
+    <object data="<%= base64_image_data %>" width="80%" height="" alt="過去問の画像"></object>
+  <% end %>
+</div>
