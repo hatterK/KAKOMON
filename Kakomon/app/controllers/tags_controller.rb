@@ -5,6 +5,15 @@ class TagsController < ApplicationController
     @tags = Tag.order('name').paginate(page: params[:page], per_page: 15)
   end
 
+  def search
+    unless params[:name] == ''
+      @tags = Tag.where("name LIKE ?", "%#{params[:name]}%").order(id: :desc).paginate(page: params[:page], per_page: 15)
+      render 'index'
+    else
+      redirect_to :tags
+    end
+  end
+
   def show
     @tag = Tag.find(params[:id])
   end
