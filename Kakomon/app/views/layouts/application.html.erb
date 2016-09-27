@@ -9,6 +9,7 @@
   <%= csrf_meta_tags %>
 </head>
 
+<body>
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -28,7 +29,7 @@
           <li><%= link_to "Home", :root %></li>
         <% end %>
         <% if current_page?(search_past_questions_path) %>
-          <li class="active"><a>Search</a></li>
+          <li class="active"><%= link_to "Search", :search_past_questions %></li>
         <% else %>
           <li><%= link_to "Search", :search_past_questions %></li>
         <% end %>
@@ -55,7 +56,7 @@
     </div>
   </div>
 </nav>
-  <body>
-    <%= yield %>
-  </body>
+
+  <%= yield %>
+</body>
 </html>

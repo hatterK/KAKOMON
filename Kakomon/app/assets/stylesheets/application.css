@@ -28,6 +28,10 @@ div {
   font-size: large;
 }
 
+mark.bg-info {
+  padding: 0px;
+}
+
 .table .thead-inverse {
   color: #2a2f36;
   background-color: #73a8f0;
@@ -35,4 +39,8 @@ div {
 
 div.jumbotron h1 {
   font-size: 40px;
+}
+
+div.image {
+  padding-top: 30px;
 }

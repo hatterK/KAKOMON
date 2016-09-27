@@ -9,6 +9,8 @@ class PastQuestionsController < ApplicationController
   def search
     @past_questions = PastQuestion.search(search_params)
       .sort_by(params[:sort_method]).paginate(page: params[:page], per_page: 15)
+    @sort = params[:sort_method]
+    @term = params[:search_term]
   end
 
   def show

@@ -3,39 +3,48 @@
   <h1><%= @page_title %></h1>
   <% if flash.notice %><p><%= flash.notice %></p><% end %>
 
-  <table>
-    <tr>
-      <th width="100px">教授:</th>
-      <td><%= @past_question.teacher %></td>
-    </tr>
-    <tr>
-      <th>開講期:</th>
-      <td><%= @past_question.exam_date.term %></td>
-    </tr>
-    <tr>
-      <th>年度:</th>
-      <td><%= @past_question.exam_date.year %></td>
-    </tr>
-    <tr>
-      <th>タグ:</th>
-      <td>
-        <ul>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col-xs-1">科目名</th>
+        <th class="col-xs-4"><%= @past_question.subject %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>教授</th>
+        <td><%= @past_question.teacher %></td>
+      </tr>
+      <tr>
+        <th>開講期</th>
+        <td><%= @past_question.exam_date.term %></td>
+      </tr>
+      <tr>
+        <th>年度</th>
+        <td><%= @past_question.exam_date.year %></td>
+      </tr>
+      <tr>
+        <th class="col-xs-2">タグ</th>
+        <td class="col-xs-10">
           <% @past_question.tags.each do |tag| %>
-            <li><%= tag.name %></li>
+            <a class="btn btn-info" href="<%= url_for(tag) %>" role="button"><%= tag.name %></a>
           <% end %>
-        </ul>
-      <td>
-    </tr>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
-  <p><%= form_tag [:set_tag, @past_question, :tags] %>
+  <div>
+    <%= form_tag [:set_tag, @past_question, :tags] %>
     <%= text_field_tag "name", params[:name] %>
     <%= submit_tag "タグを追加" %>
-  </p>
+  </div>
 
-  <% if File.extname(@past_question.image_url) == '.pdf' %>
-    <object data="<%= base64_image_data %>" width="100%" height="800px" alt="過去問の画像"></object>
-  <% else %>
-    <object data="<%= base64_image_data %>" width="80%" height="" alt="過去問の画像"></object>
-  <% end %>
+  <div class="image">
+    <% if File.extname(@past_question.image_url) == '.pdf' %>
+      <object data="<%= base64_image_data %>" width="100%" height="800px" alt="過去問の画像"></object>
+    <% else %>
+      <object data="<%= base64_image_data %>" width="100%" height="" alt="過去問の画像"></object>
+    <% end %>
+  </div>
 </div>

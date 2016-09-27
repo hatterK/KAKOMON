@@ -4,43 +4,59 @@
   <p><%= flash.notice %></p>
   <br>
   <%= form_tag :search_past_questions, method: :get do %>
-    <table>
-      <tr>
-        <th>教科名　：　</th>
-        <td><%= text_field_tag "search_subject", params[:search_subject] %></td>
-      </tr>
-      <tr>
-        <th>教師　：　</th>
-        <td><%= text_field_tag "search_teacher", params[:search_teacher] %></td>
-      </tr>
-      <tr>
-        <th>年度　：　</th>
-        <td><%= number_field_tag "search_year", params[:search_year], in:2011..2050, title: "2011から2050の値を入力してください" %></td>
-      </tr>
-      <tr>
-        <th>開講期　：　</th>
-        <td><%= select_tag :search_term, options_for_select([["条件なし",""],["前期","first_semester"],["後期", "latter_semester"],["通年", "year_round"],["前期集中","i_first_semester"],["後期集中", "i_second_semester"]]) %></td>
-      </tr>
-      <tr>
-        <th>タグ名　：　</th>
-        <td><%= text_field_tag "search_tag1", params[:search_tag1] %></td>
-      </tr>
-      <tr>
-        <th>タグ名　：　</th>
-        <td><%= text_field_tag "search_tag2", params[:search_tag2] %></td>
-      </tr>
-      <tr>
-        <th>タグ名　：　</th>
-        <td><%= text_field_tag "search_tag3", params[:search_tag3] %></td>
-      </tr>
-      <tr>
-        <th>ソート方法　：　</th>
-        <td><%= select_tag :sort_method, options_for_select([["追加日時","created_at"],["年度降順","year_desc"],["年度昇順", "year_asce"],["閲覧数", "views"],["教科名","subject"],["教授名", "teacher"]]) %></td>
-      </tr>
-      <tr>
-        <td><%= submit_tag "検索" %></td>
-      </tr>
-    </table>
+    <div class="form-group row">
+      <label for="search_subject" class="col-xs-2 col-form-label">教科名</label>
+      <div class="col-xs-4">
+        <%= text_field_tag "search_subject", params[:search_subject], class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="search_teacher" class="col-xs-2 col-form-label">教師</label>
+      <div class="col-xs-4">
+        <%= text_field_tag "search_teacher", params[:search_teacher], class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="search_year" class="col-xs-2 col-form-label">年度</label>
+      <div class="col-xs-4">
+        <%= number_field_tag "search_year", params[:search_year], in:2011..2050, title: "2011から2050の値を入力してください", class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="search_term" class="col-xs-2 col-form-label">開講期</label>
+      <div class="col-xs-4">
+        <%= select_tag :search_term, options_for_select(term_option), selected: "first_semester", class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="search_tag1" class="col-xs-2 col-form-label">タグ名</label>
+      <div class="col-xs-4">
+        <%= text_field_tag "search_tag1", params[:search_tag1], class: "form-control"%>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="search_tag2" class="col-xs-2 col-form-label">タグ名</label>
+      <div class="col-xs-4">
+        <%= text_field_tag "search_tag2", params[:search_tag2], class: "form-control"%>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="search_tag3" class="col-xs-2 col-form-label">タグ名</label>
+      <div class="col-xs-4">
+        <%= text_field_tag "search_tag3", params[:search_tag3], class: "form-control"%>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="sort_method" class="col-xs-2 col-form-label">ソート方法</label>
+      <div class="col-xs-4">
+        <%= select_tag :sort_method, options_for_select(sort_option), class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-xs-4 col-xs-offset-2">
+        <%= submit_tag "検索", class: "btn btn-primary btn-lg btn-block"%>
+      </div>
+    </div>
   <% end %>
   <br>
 
@@ -64,12 +80,12 @@
   	    <td><%= japanese_term(past_question.exam_date.term) %></td>
   	    <td><%= past_question.exam_date.year %></td>
         <td><%= past_question.views %></td>
-  	    <td>
+  	    <td class="col-xs-3">
           <% past_question.tags.each do |tag| %>
             <%= link_to tag.name, tag %>
           <% end %>
         </td>
-        <td><%= past_question.created_at %></td>
+        <td><%= past_question.created_at.strftime('%Y年%m月%d日') %></td>
       </tr>
     </tbody>
   <% end %>

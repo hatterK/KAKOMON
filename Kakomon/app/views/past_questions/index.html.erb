@@ -30,9 +30,9 @@
             <td><%= japanese_term( past_question.exam_date.term ) %></td>
             <td><%= past_question.exam_date.year %></td>
             <td><%= past_question.views %></td>
-            <td>
+            <td class="col-xs-3">
               <% past_question.tags.each do |tag| %>
-                <%= link_to tag.name, tag %>
+                <mark class="bg-info"><%= link_to tag.name, tag %></mark>
               <% end %>
             </td>
           </tr>
