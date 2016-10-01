@@ -1,13 +1,7 @@
 <h1>過去問データベース 編集者ページ</h1>
 <p><%= link_to "アップロード", :new_editor_past_question, class:'btn btn-primary pull-right' %></p>
-<p><%= flash.notice %></p>
+<% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
 <br><br>
-
-<style>
-div{
-font-size: large;
-}
-</style>
 
 <p><%= link_to "過去問サイトのトップへ戻る", :past_questions %></p>
 

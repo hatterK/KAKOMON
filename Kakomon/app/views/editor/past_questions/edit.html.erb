@@ -1,5 +1,5 @@
 <h1>編集</h1>
-<p><%= flash.notice %></p>
+<% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
 
 <h2><%= @past_question.subject %></h2>
 <%= form_for [:editor, @past_question] do |f| %>

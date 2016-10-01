@@ -1,7 +1,7 @@
 <div class="container">
   <h1>過去問データベースの検索</h1>
 
-  <p><%= flash.notice %></p>
+  <% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
   <br>
   <%= form_tag :search_past_questions, method: :get do %>
     <div class="form-group row">

@@ -1,7 +1,7 @@
 <div class="container">
   <% @page_title = "タグの一覧" %>
   <h1><%= @page_title %></h1>
-  <% if flash.notice %><p><%= flash.notice %></p><% end %>
+  <% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
   <%= form_tag :search_tags, method: :get do %>
     <table>
       <tr>

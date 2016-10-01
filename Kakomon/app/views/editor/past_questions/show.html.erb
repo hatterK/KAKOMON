@@ -1,7 +1,7 @@
 <div class="container">
   <h1><%= @past_question.subject %></h1>
-  <p><%= flash.notice %></p>
-
+  <% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
+  
   <p><%= link_to "編集する", [:edit, :editor, @past_question] %></p>
   <p>
     <ul>

@@ -1,7 +1,7 @@
 <div class="container">
   <% @page_title = "ログイン" %>
   <% if flash.alert %><p><%= flash.alert %></p><% end %>
-  <% if flash.notice %><p><%= flash.notice %></p><% end %>
+  <% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
 
   <% unless current_member %>
     <%= form_tag :session, class: "form-signin" do %>
