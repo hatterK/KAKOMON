@@ -1,15 +1,17 @@
-<h1>アップロード</h1>
-<p><%= flash.notice %></p>
-<%= form_for [:admin, @past_question] do |f| %>
+<div class="container">
+  <h1>アップロード</h1>
+  <p><%= flash.notice %></p>
+  <%= form_for [:admin, @past_question] do |f| %>
 
-<%= render 'form', f: f %>
+  <%= render 'form', f: f %>
 
-<tr>
-  <th><%= f.label :ファイルアップロード %></th>
-  <td><%= f.file_field :image %></td>
-</tr>
-<p>
-	<%= f.submit %>
-</p>
+  <tr>
+    <th><%= f.label :ファイルアップロード %></th>
+    <td><%= f.file_field :image %></td>
+  </tr>
+  <p>
+  	<%= f.submit %>
+  </p>
 
-<% end %>
+  <% end %>
+</div>

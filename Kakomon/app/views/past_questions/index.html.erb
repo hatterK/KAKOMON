@@ -1,43 +1,43 @@
 <div class="container">
-    <% if current_member %>
-      <div class="jumbotron">
-        <div class="container">
-          <h1>過去問データベース</h1>
-          <br>
-          <p>過去問データベースを利用する際には、過去問を寮外へと持ち出さない点に十分注意してください。</p>
-          <p>過去問が流出し、過去問データベースを停止することにならないように協力をお願いします。</p>
-          <p><a class="btn btn-primary btn-lg" href="<%= search_past_questions_path %>" role="button">過去問データベースを検索 &raquo;</a></p>
-        </div>
+  <% if current_member %>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>過去問データベース</h1>
+        <br>
+        <p>過去問データベースを利用する際には、過去問を寮外へと持ち出さない点に十分注意してください。</p>
+        <p>過去問が流出し、過去問データベースを停止することにならないように協力をお願いします。</p>
+        <p><a class="btn btn-primary btn-lg" href="<%= search_past_questions_path %>" role="button">過去問データベースを検索 &raquo;</a></p>
       </div>
-      <% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
-      <h2>最近追加された過去問</h2>
-      <table class="table table-hover table-striped">
-        <thead class="thead-inverse">
-          <tr>
-            <th>科目名</th>
-            <th>教授</th>
-            <th>開講期</th>
-            <th>年度</th>
-            <th>閲覧数</th>
-            <th>タグ</th>
-          </tr>
-        </thead>
-      <% @past_questions.each do |past_question| %>
-        <tbody>
-          <tr>
-            <th scope="row"><%= link_to past_question.subject, past_question %></th>
-            <td><%= past_question.teacher %></td>
-            <td><%= japanese_term( past_question.exam_date.term ) %></td>
-            <td><%= past_question.exam_date.year %></td>
-            <td><%= past_question.views %></td>
-            <td class="col-xs-3">
-              <% past_question.tags.each do |tag| %>
-                <mark class="bg-info"><%= link_to tag.name, tag %></mark>
-              <% end %>
-            </td>
-          </tr>
-        </tbody>
-      <% end %>
+    </div>
+    <% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
+    <h2>最近追加された過去問</h2>
+    <table class="table table-hover table-striped">
+      <thead class="thead-inverse">
+        <tr>
+          <th>科目名</th>
+          <th>教授</th>
+          <th>開講期</th>
+          <th>年度</th>
+          <th>閲覧数</th>
+          <th>タグ</th>
+        </tr>
+      </thead>
+    <% @past_questions.each do |past_question| %>
+      <tbody>
+        <tr>
+          <th scope="row"><%= link_to past_question.subject, past_question %></th>
+          <td><%= past_question.teacher %></td>
+          <td><%= japanese_term( past_question.exam_date.term ) %></td>
+          <td><%= past_question.exam_date.year %></td>
+          <td><%= past_question.views %></td>
+          <td class="col-xs-3">
+            <% past_question.tags.each do |tag| %>
+              <mark class="bg-info"><%= link_to tag.name, tag %></mark>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    <% end %>
     </table>
     <%= will_paginate @past_questions %>
   <% else %>

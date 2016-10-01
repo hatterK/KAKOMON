@@ -1,10 +1,7 @@
-<h1>タグのshow</h1>
-<% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
-<h2><%= @tag.name %></h2>
-
-<p><%= link_to "編集者ページのトップへ戻る", :editor_root %></p>
-
 <div class="container">
+  <h1><%= @tag.name %></h1>
+  <% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
+
   <table class="table table-hover">
     <thead>
       <tr>
@@ -13,6 +10,7 @@
         <th>開講期</th>
         <th>年度</th>
         <th>閲覧数</th>
+        <th>公開</th>
         <th>タグ</th>
         <th>追加日時</th>
         <th>編集</th>
@@ -22,9 +20,10 @@
     <tbody>
       <td><%= link_to past_question.subject, [:editor, past_question] %></td>
       <td><%= past_question.teacher %></td>
-      <td><%= past_question.exam_date.term %></td>
+      <td><%= japanese_term(past_question.exam_date.term) %></td>
       <td><%= past_question.exam_date.year %></td>
       <td><%= past_question.views %></td>
+      <td><%= if past_question.pub then '公開' else '非公開' end %></td>
       <td>
         <% past_question.tags.each do |tag| %>
           <%= link_to tag.name, [:editor, tag] %>

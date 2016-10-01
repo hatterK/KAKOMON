@@ -1,61 +1,50 @@
-<h1>過去問データベース　管理者ページ</h1>
-<p><%= link_to "ユーザーアカウント一覧", :admin_members %></p>
-<p><%= link_to "試験日時の一覧", :admin_exam_dates %></p>
-<p><%= link_to "タグの一覧", :admin_tags %></p>
-<p><%= link_to "アップロード", :new_admin_past_question, class:'btn btn-primary pull-right' %></p>
-<p><%= flash.notice %></p>
-<br><br>
+<div class="container">
+  <h1>過去問データベース　管理者ページ</h1>
+  <p><%= link_to "アップロード", :new_admin_past_question, class:'btn btn-primary pull-right' %></p>
+  <p><%= flash.notice %></p>
+  <br>
 
-<style>
-div{
-font-size: large;
-}
-</style>
+  <% if current_member %>
+    <%= form_tag :search_admin_past_questions, method: :get do %>
+      <table>
+        <tr>
+          <th>教科名　：　</th>
+          <td><%= text_field_tag "search_subject", params[:search_subject] %></td>
+        </tr>
+        <tr>
+          <th>教師　：　</th>
+          <td><%= text_field_tag "search_teacher", params[:search_teacher] %></td>
+        </tr>
+        <tr>
+          <th>年度　：　</th>
+          <td><%= text_field_tag "search_year", params[:search_year] %></td>
+        </tr>
+        <tr>
+          <th>開講期　：　</th>
+          <td><%= text_field_tag "search_term", params[:search_term] %></td>
+        </tr>
+        <tr>
+          <th>タグ名　：　</th>
+          <td><%= text_field_tag "search_tag1", params[:search_tag1] %></td>
+        </tr>
+        <tr>
+          <th>タグ名　：　</th>
+          <td><%= text_field_tag "search_tag2", params[:search_tag2] %></td>
+        </tr>
+        <tr>
+          <th>タグ名　：　</th>
+          <td><%= text_field_tag "search_tag3", params[:search_tag3] %></td>
+        </tr>
+        <tr>
+          <th>ソート方法　：　</th>
+          <td><%= text_field_tag "sort_method", params[:sort_method] %></td>
+        </tr>
+        <tr>
+          <td><%= submit_tag "検索" %></td>
+        </tr>
+      </table>
+    <% end %>
 
-<p><%= link_to "過去問サイトのトップへ戻る", :past_questions %></p>
-
-<% if current_member %>
-  <%= form_tag :search_admin_past_questions, method: :get do %>
-    <table>
-      <tr>
-        <th>教科名　：　</th>
-        <td><%= text_field_tag "search_subject", params[:search_subject] %></td>
-      </tr>
-      <tr>
-        <th>教師　：　</th>
-        <td><%= text_field_tag "search_teacher", params[:search_teacher] %></td>
-      </tr>
-      <tr>
-        <th>年度　：　</th>
-        <td><%= text_field_tag "search_year", params[:search_year] %></td>
-      </tr>
-      <tr>
-        <th>開講期　：　</th>
-        <td><%= text_field_tag "search_term", params[:search_term] %></td>
-      </tr>
-      <tr>
-        <th>タグ名　：　</th>
-        <td><%= text_field_tag "search_tag1", params[:search_tag1] %></td>
-      </tr>
-      <tr>
-        <th>タグ名　：　</th>
-        <td><%= text_field_tag "search_tag2", params[:search_tag2] %></td>
-      </tr>
-      <tr>
-        <th>タグ名　：　</th>
-        <td><%= text_field_tag "search_tag3", params[:search_tag3] %></td>
-      </tr>
-      <tr>
-        <th>ソート方法　：　</th>
-        <td><%= text_field_tag "sort_method", params[:sort_method] %></td>
-      </tr>
-      <tr>
-        <td><%= submit_tag "検索" %></td>
-      </tr>
-    </table>
-  <% end %>
-
-  <div class="container">
     <table class="table table-hover">
       <thead>
         <tr>

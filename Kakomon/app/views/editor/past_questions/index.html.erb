@@ -1,51 +1,65 @@
-<h1>過去問データベース 編集者ページ</h1>
-<p><%= link_to "アップロード", :new_editor_past_question, class:'btn btn-primary pull-right' %></p>
-<% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
-<br><br>
-
-<p><%= link_to "過去問サイトのトップへ戻る", :past_questions %></p>
-
-<%= form_tag :search_editor_past_questions, method: :get do %>
-  <table>
-    <tr>
-      <th>教科名　：　</th>
-      <td><%= text_field_tag "search_subject", params[:search_subject] %></td>
-    </tr>
-    <tr>
-      <th>教師　：　</th>
-      <td><%= text_field_tag "search_teacher", params[:search_teacher] %></td>
-    </tr>
-    <tr>
-      <th>年度　：　</th>
-      <td><%= text_field_tag "search_year", params[:search_year] %></td>
-    </tr>
-    <tr>
-      <th>開講期　：　</th>
-      <td><%= text_field_tag "search_term", params[:search_term] %></td>
-    </tr>
-    <tr>
-      <th>タグ名　：　</th>
-      <td><%= text_field_tag "search_tag1", params[:search_tag1] %></td>
-    </tr>
-    <tr>
-      <th>タグ名　：　</th>
-      <td><%= text_field_tag "search_tag2", params[:search_tag2] %></td>
-    </tr>
-    <tr>
-      <th>タグ名　：　</th>
-      <td><%= text_field_tag "search_tag3", params[:search_tag3] %></td>
-    </tr>
-    <tr>
-      <th>ソート方法　：　</th>
-      <td><%= text_field_tag "sort_method", params[:sort_method] %></td>
-    </tr>
-    <tr>
-      <td><%= submit_tag "検索" %></td>
-    </tr>
-  </table>
-<% end %>
-
 <div class="container">
+  <h1>過去問データベース 編集者ページ</h1>
+  <p><%= link_to "アップロード", :new_editor_past_question, class:'btn btn-primary pull-right' %></p>
+  <% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
+  <br>
+
+  <%= form_tag :search_past_questions, method: :get do %>
+    <div class="form-group row">
+      <label for="search_subject" class="col-xs-2 col-form-label">教科名</label>
+      <div class="col-xs-4">
+        <%= text_field_tag "search_subject", params[:search_subject], class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="search_teacher" class="col-xs-2 col-form-label">教師</label>
+      <div class="col-xs-4">
+        <%= text_field_tag "search_teacher", params[:search_teacher], class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="search_year" class="col-xs-2 col-form-label">年度</label>
+      <div class="col-xs-4">
+        <%= number_field_tag "search_year", params[:search_year], in:2011..2100, title: "2011から2100の値を入力してください", class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="search_term" class="col-xs-2 col-form-label">開講期</label>
+      <div class="col-xs-4">
+        <%= select_tag :search_term, options_for_select(term_option), selected: "first_semester", class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="search_tag1" class="col-xs-2 col-form-label">タグ名</label>
+      <div class="col-xs-4">
+        <%= text_field_tag "search_tag1", params[:search_tag1], class: "form-control"%>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="search_tag2" class="col-xs-2 col-form-label">タグ名</label>
+      <div class="col-xs-4">
+        <%= text_field_tag "search_tag2", params[:search_tag2], class: "form-control"%>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="search_tag3" class="col-xs-2 col-form-label">タグ名</label>
+      <div class="col-xs-4">
+        <%= text_field_tag "search_tag3", params[:search_tag3], class: "form-control"%>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="sort_method" class="col-xs-2 col-form-label">ソート方法</label>
+      <div class="col-xs-4">
+        <%= select_tag :sort_method, options_for_select(sort_option), class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-xs-4 col-xs-offset-2">
+        <%= submit_tag "検索", class: "btn btn-primary btn-lg btn-block"%>
+      </div>
+    </div>
+  <% end %>
+
   <table class="table table-hover">
     <thead>
       <tr>
@@ -64,7 +78,7 @@
     <tbody>
 	    <td><%= link_to past_question.subject, [:editor, past_question] %></td>
 	    <td><%= past_question.teacher %></td>
-	    <td><%= past_question.exam_date.term %></td>
+	    <td><%= japanese_term(past_question.exam_date.term) %></td>
 	    <td><%= past_question.exam_date.year %></td>
       <td><%= past_question.views %></td>
       <td><%= if past_question.pub then '公開' else '非公開' end %></td>

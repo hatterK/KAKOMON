@@ -3,22 +3,28 @@
   <p><%= flash.notice %></p>
 <% end %>
 
-<p><%= link_to "管理者ページのトップ", :admin_past_questions %></p>
 <p><%= link_to "編集する", [:edit, :admin, @past_question] %></p>
 <p>
   <ul>
     <li>教授:<%= @past_question.teacher %></li>
     <li>開講期:<%= @past_question.exam_date.term %></li>
     <li>年度:<%= @past_question.exam_date.year %></li>
-    <li>タグ:
+    <li>タグ:</li>
+    <ul>
       <% @past_question.tags.each do |tag| %>
-        ●<%= tag.name %>●<%= " " %>
+        <li><%= tag.name %></li>
       <% end %>
-    </li>
+    </ul>
+    <br>
+    <p>管理情報----------------------</p>
     <li>exam_date_id : <%= @past_question.exam_date_id %></li>
-    <% @past_question.tags.each do |tag| %>
-        <li>tag_id : <%= tag.id %></li>
-    <% end %>
+    <li>tag_ids :</li>
+    <ul>
+      <% @past_question.tags.each do |tag| %>
+          <li>tag_id : <%= tag.id %></li>
+      <% end %>
+    </ul>
+    <p>----------------------------------</p>
   </ul>
 </p>
 <p><%= form_tag [:set_tag, :admin, @past_question, :tags] %>

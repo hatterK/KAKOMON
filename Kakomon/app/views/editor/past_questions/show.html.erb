@@ -1,22 +1,18 @@
 <div class="container">
   <h1><%= @past_question.subject %></h1>
   <% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
-  
-  <p><%= link_to "編集する", [:edit, :editor, @past_question] %></p>
+
+  <p><%= link_to "編集する", [:edit, :editor, @past_question], { class: "btn btn-lg btn-primary" } %></p>
   <p>
     <ul>
-      <li>教授:<%= @past_question.teacher %></li>
-      <li>開講期:<%= @past_question.exam_date.term %></li>
-      <li>年度:<%= @past_question.exam_date.year %></li>
+      <li>教授: <%= @past_question.teacher %></li>
+      <li>年度: <%= @past_question.exam_date.year %></li>
+      <li>開講期: <%= japanese_term(@past_question.exam_date.term) %></li>
       <li>タグ:
         <% @past_question.tags.each do |tag| %>
-          ●<%= tag.name %>●<%= " " %>
+          <%= link_to tag.name, [:editor, tag], { class: "btn btn-success" } %>
         <% end %>
       </li>
-      <li>exam_date_id : <%= @past_question.exam_date_id %></li>
-      <% @past_question.tags.each do |tag| %>
-          <li>tag_id : <%= tag.id %></li>
-      <% end %>
     </ul>
   </p>
   <p><%= form_tag [:set_tag, :editor, @past_question, :tags] %>

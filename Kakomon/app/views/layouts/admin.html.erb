@@ -38,14 +38,20 @@
           <% else %>
             <li><%= link_to "Tag", :admin_tags %></li>
           <% end %>
+          <% if current_page?(:admin_exam_dates) %>
+            <li class="active"><a>Exam Date</a></li>
+          <% else %>
+            <li><%= link_to "Exam Date", :admin_exam_dates %></li>
+          <% end %>
+          <% if current_page?(:admin_members) %>
+            <li class="active"><a>Member</a></li>
+          <% else %>
+            <li><%= link_to "Member", :admin_members %></li>
+          <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <% if editor_member %>
-              <li><%= link_to "編集者ページ", :editor_root %></li>
-            <% if super_member %>
-              <li><%= link_to "管理者ページ", :admin_root %></li>
-            <% end %>
-          <% end %>
+            <li><%= link_to "編集者ページ", :editor_root %></li>
+            <li><%= link_to "管理者ページ", :admin_root %></li>
           <% if current_member %>
             <li><%= link_to "ログアウト", :session, method: :delete,
               data: { confirm: "ログアウトしますか？" }  %><span class="sr-only">(current)</span></li>

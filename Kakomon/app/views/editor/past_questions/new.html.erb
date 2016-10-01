@@ -1,17 +1,19 @@
-<h1>アップロード</h1>
-<% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
-<%= form_for [:editor, @past_question] do |f| %>
+<div class="container">
+  <h1>アップロード</h1>
+  <% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
+  <%= form_for [:editor, @past_question] do |f| %>
 
-<%= render 'form', f: f %>
+  <%= render 'form', f: f %>
 
-<table>
-  <tr>
-    <th><%= f.label :ファイルアップロード %></th>
-    <td><%= f.file_field :image %></td>
-  </tr>
-</table>
-<p>
-	<%= f.submit %>
-</p>
+  <table>
+    <tr>
+      <th><%= f.label :ファイルアップロード %></th>
+      <td><%= f.file_field :image %></td>
+    </tr>
+  </table>
+  <p>
+  	<%= f.submit %>
+  </p>
 
-<% end %>
+  <% end %>
+</div>

@@ -1,9 +1,11 @@
-<h1>試験日時の追加</h1>
+<div class="container">
+  <h1>試験日時の追加</h1>
 
-<%= form_for [:admin, @exam_date] do |form| %>
+  <%= form_for [:admin, @exam_date] do |form| %>
 
-<%= render 'form', form: form %>
+  <%= render 'form', form: form %>
 
-<%= form.submit %>
+  <%= form.submit %>
 
-<% end %>
+  <% end %>
+</div>

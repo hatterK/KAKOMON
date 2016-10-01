@@ -1,11 +1,13 @@
-<% @page_title = "メンバー情報の編集" %>
+<div class="container">
+  <% @page_title = "メンバー情報の編集" %>
 
-<h1><%= @page_title %></h1>
-<p><%= flash.notice %></p>
+  <h1><%= @page_title %></h1>
+  <p><%= flash.notice %></p>
 
-<p><%= link_to "メンバー情報の詳細に戻る", [:admin, @member] %></p>
+  <p><%= link_to "メンバー情報の詳細に戻る", [:admin, @member] %></p>
 
-<%= form_for [:admin, @member] do |form| %>
-<%= render "form", form: form %>
-<p><%= form.submit %></p>
-<% end %>
+  <%= form_for [:admin, @member] do |form| %>
+  <%= render "form", form: form %>
+  <p><%= form.submit %></p>
+  <% end %>
+</div>

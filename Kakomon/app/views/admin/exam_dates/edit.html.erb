@@ -1,10 +1,12 @@
-<h1>試験日時の修正</h1>
+<div class="container">
+  <h1>試験日時の修正</h1>
 
-<%= form_for [:admin, @exam_date] do |form| %>
+  <%= form_for [:admin, @exam_date] do |form| %>
 
-<%= render 'form', form: form %>
+  <%= render 'form', form: form %>
 
-<p>この修正により、関連する過去問全てに影響が生じます。注意してください。</p>
-<%= form.submit %>
+  <p><font color=#ff0000>この修正により、関連する過去問全てに影響が生じます。注意してください。</font></p>
+  <%= form.submit %>
 
-<% end %>
+  <% end %>
+</div>

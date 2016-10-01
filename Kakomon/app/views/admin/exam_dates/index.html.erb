@@ -1,29 +1,27 @@
-<h1>試験日時の一覧</h1>
-<% if flash.notice %>
-<p><%= flash.notice %></p>
-<% end %>
-
-<p><%= link_to "管理者ページのトップへ戻る", :admin_root %></p>
-
-<p><%= link_to '試験日時の追加', :new_admin_exam_date %></p>
-
-<%= form_tag :search_admin_exam_dates, method: :get do %>
-  <table>
-    <tr>
-      <th>年度　：　</th>
-      <td><%= text_field_tag "search_year", params[:search_year] %></td>
-    </tr>
-    <tr>
-      <th>開講期　：　</th>
-      <td><%= text_field_tag "search_term", params[:search_term] %></td>
-    </tr>
-    <tr>
-      <td><%= submit_tag "検索" %></td>
-    </tr>
-  </table>
-<% end %>
-
 <div class="container">
+  <h1>試験日時の一覧</h1>
+  <% if flash.notice %>
+  <p><%= flash.notice %></p>
+  <% end %>
+
+  <p><%= link_to '試験日時の追加', :new_admin_exam_date %></p>
+
+  <%= form_tag :search_admin_exam_dates, method: :get do %>
+    <table>
+      <tr>
+        <th>年度　：　</th>
+        <td><%= text_field_tag "search_year", params[:search_year] %></td>
+      </tr>
+      <tr>
+        <th>開講期　：　</th>
+        <td><%= text_field_tag "search_term", params[:search_term] %></td>
+      </tr>
+      <tr>
+        <td><%= submit_tag "検索" %></td>
+      </tr>
+    </table>
+  <% end %>
+
   <table class="table table-hover">
     <thead>
       <tr>

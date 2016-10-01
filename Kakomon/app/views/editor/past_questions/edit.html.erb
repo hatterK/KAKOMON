@@ -1,30 +1,30 @@
-<h1>編集</h1>
-<% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
+<div class="container">
+  <h1>編集</h1>
+  <% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
 
-<h2><%= @past_question.subject %></h2>
-<%= form_for [:editor, @past_question] do |f| %>
+  <h2><%= @past_question.subject %></h2>
+  <%= form_for [:editor, @past_question] do |f| %>
 
-<%= render 'form', f: f %>
+  <%= render 'form', f: f %>
 
-<table>
-  <tr>
-    <th><%= f.label :一般ユーザに公開 %></th>
-    <td><%= f.radio_button :pub, true, {:checked => true} %>する　　</td>
-    <td><%= f.radio_button :pub, false, {} %>しない</td>
-  </tr>
-</table>
+  <table>
+    <tr>
+      <th><%= f.label :一般ユーザに公開 %></th>
+      <td><%= f.radio_button :pub, true, {:checked => true} %>する　　</td>
+      <td><%= f.radio_button :pub, false, {} %>しない</td>
+    </tr>
+  </table>
 
-<table>
-<% @past_question.tags.each do |tag| %>
-  <tr>
-    <th><%= tag.name %></th>
-    <td><%= link_to "削除", [:untag, :editor, @past_question, tag] %></td>
-  </tr>
-<% end %>
-</table>
-<p>
-	<%= f.submit %>
-</p>
-
-
-<% end %>
+  <table>
+  <% @past_question.tags.each do |tag| %>
+    <tr>
+      <th><%= tag.name %></th>
+      <td><%= link_to "削除", [:untag, :editor, @past_question, tag] %></td>
+    </tr>
+  <% end %>
+  </table>
+  <p>
+  	<%= f.submit %>
+  </p>
+  <% end %>
+</div>

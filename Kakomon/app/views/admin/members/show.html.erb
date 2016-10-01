@@ -1,9 +1,11 @@
-<% @page_title = "メンバー情報" %>
+<div class="container">
+  <% @page_title = "メンバー情報" %>
 
-<h1><%= @page_title %></h1>
-<p><%= flash.notice %></p>
+  <h1><%= @page_title %></h1>
+  <p><%= flash.notice %></p>
 
-<p><%= link_to "メンバーのトップへ戻る", :admin_members %>
-<p><%= link_to "編集", [:edit, :admin, @member] %></p>
-
-<%= render "body" %>
+  <%= render "body" %>
+  <p><%= link_to "編集", [:edit, :admin, @member] %></p>
+  <p><%= link_to "削除", [:admin, @member], method: :delete,
+    data: { confirm: "本当に削除しますか？" } %></p>
+</div>

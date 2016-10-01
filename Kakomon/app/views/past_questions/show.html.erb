@@ -17,7 +17,7 @@
       </tr>
       <tr>
         <th>開講期</th>
-        <td><%= @past_question.exam_date.term %></td>
+        <td><%= japanese_term(@past_question.exam_date.term) %></td>
       </tr>
       <tr>
         <th>年度</th>
@@ -27,7 +27,7 @@
         <th class="col-xs-2">タグ</th>
         <td class="col-xs-10">
           <% @past_question.tags.each do |tag| %>
-            <a class="btn btn-info" href="<%= url_for(tag) %>" role="button"><%= tag.name %></a>
+            <a class="btn btn-success" href="<%= url_for(tag) %>" role="button"><%= tag.name %></a>
           <% end %>
         </td>
       </tr>

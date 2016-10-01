@@ -1,21 +1,21 @@
-<h1>編集</h1>
+<div class="container">
+  <h1>編集</h1>
 
-<h2><%= @past_question.subject %></h2>
-<%= form_for [:admin, @past_question] do |f| %>
+  <h2><%= @past_question.subject %></h2>
+  <%= form_for [:admin, @past_question] do |f| %>
 
-<%= render 'form', f: f %>
+  <%= render 'form', f: f %>
 
-<table>
-<% @past_question.tags.each do |tag| %>
-  <tr>
-    <th><%= tag.name %></th>
-    <td><%= link_to "削除", [:untag, :admin, @past_question, tag] %></td>
-  </tr>
-<% end %>
-</table>
-<p>
-	<%= f.submit %>
-</p>
-
-
-<% end %>
+  <table>
+  <% @past_question.tags.each do |tag| %>
+    <tr>
+      <th><%= tag.name %></th>
+      <td><%= link_to "削除", [:untag, :admin, @past_question, tag] %></td>
+    </tr>
+  <% end %>
+  </table>
+  <p>
+  	<%= f.submit %>
+  </p>
+  <% end %>
+</div>
