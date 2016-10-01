@@ -6,9 +6,9 @@
   <%= stylesheet_link_tag "application" %>
 </head>
 <body>
-  <div>
-    <p><%= link_to "過去問サイトのトップへ戻る", :root %></p>
+  <div class="container">
+    <%= link_to "過去問サイトのトップへ戻る", :root %>
+    <%= yield %>
   </div>
-  <%= yield %>
 </body>
 </html>

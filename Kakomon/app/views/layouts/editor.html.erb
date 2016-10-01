@@ -29,7 +29,7 @@
             <li><%= link_to "Home", :editor_root %></li>
           <% end %>
           <% if current_page?(:search_editor_past_questions) %>
-            <li class="active"><a>Search</a></li>
+            <li class="active"><%= link_to "Search", :search_editor_past_questions %></li>
           <% else %>
             <li><%= link_to "Search", :search_editor_past_questions %></li>
           <% end %>

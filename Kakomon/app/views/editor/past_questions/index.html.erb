@@ -4,7 +4,7 @@
   <% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
   <br>
 
-  <%= form_tag :search_past_questions, method: :get do %>
+  <%= form_tag :search_editor_past_questions, method: :get do %>
     <div class="form-group row">
       <label for="search_subject" class="col-xs-2 col-form-label">教科名</label>
       <div class="col-xs-4">
@@ -58,40 +58,71 @@
         <%= submit_tag "検索", class: "btn btn-primary btn-lg btn-block"%>
       </div>
     </div>
-  <% end %>
 
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>科目名</th>
-        <th>教授</th>
-        <th>開講期</th>
-        <th>年度</th>
-        <th>閲覧数</th>
-        <th>公開</th>
-        <th>タグ</th>
-        <th>追加日時</th>
-        <th>編集</th>
-      </tr>
-    </thead>
-  <% @past_questions.each do |past_question| %>
-    <tbody>
-	    <td><%= link_to past_question.subject, [:editor, past_question] %></td>
-	    <td><%= past_question.teacher %></td>
-	    <td><%= japanese_term(past_question.exam_date.term) %></td>
-	    <td><%= past_question.exam_date.year %></td>
-      <td><%= past_question.views %></td>
-      <td><%= if past_question.pub then '公開' else '非公開' end %></td>
-	    <td>
-        <% past_question.tags.each do |tag| %>
-          <%= link_to tag.name, [:editor, tag] %>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <% if @show_subject %>
+            <th>科目名<%= check_box_tag :show_subject, true, true, {} %></th>
+          <% end %>
+          <% if @show_teacher %>
+          <th>教授<%= check_box_tag :show_teacher, true, true, {} %></th>
+          <% end %>
+          <% if @show_term %>
+          <th>開講期<%= check_box_tag :show_term, true, true, {} %></th>
+          <% end %>
+          <% if @show_year %>
+          <th>年度<%= check_box_tag :show_year, true, true, {} %></th>
+          <% end %>
+          <% if @show_views %>
+          <th>閲覧数<%= check_box_tag :show_views, true, true, {} %></th>
+          <% end %>
+          <% if @show_pub %>
+          <th>公開<%= check_box_tag :show_pub, true, true, {} %></th>
+          <% end %>
+          <% if @show_tag %>
+          <th>タグ<%= check_box_tag :show_tag, true, true, {} %></th>
+          <% end %>
+          <% if @show_created_at %>
+          <th>追加日時<%= check_box_tag :show_created_at, true, true, {} %></th>
+          <% end %>
+          <th>編集</th>
+        </tr>
+      </thead>
+    <% end %>
+    <% @past_questions.each do |past_question| %>
+      <tbody>
+        <% if @show_subject %>
+        <td><%= link_to past_question.subject, [:editor, past_question] %></td>
         <% end %>
-      </td>
-      <td><%= past_question.created_at %></td>
-	    <td><%= link_to "編集", [:edit, :editor, past_question], class:'btn btn-default btn-sm' %>
-      </td>
-    </tbody>
-  <% end %>
-  </table>
+        <% if @show_teacher %>
+        <td><%= past_question.teacher %></td>
+        <% end %>
+        <% if @show_term %>
+        <td><%= japanese_term(past_question.exam_date.term) %></td>
+        <% end %>
+        <% if @show_year %>
+        <td><%= past_question.exam_date.year %></td>
+        <% end %>
+        <% if @show_views %>
+        <td><%= past_question.views %></td>
+        <% end %>
+        <% if @show_pub %>
+        <td><%= if past_question.pub then '公開' else '非公開' end %></td>
+        <% end %>
+        <% if @show_tag %>
+        <td>
+          <% past_question.tags.each do |tag| %>
+            <%= link_to tag.name, [:editor, tag] %>
+          <% end %>
+        </td>
+        <% end %>
+        <% if @show_created_at %>
+        <td><%= past_question.created_at %></td>
+        <% end %>
+        <td><%= link_to "編集", [:edit, :editor, past_question], class:'btn btn-default btn-sm' %></td>
+      </tbody>
+    <% end %>
+    </table>
   <%= will_paginate @past_questions %>
 </div>

@@ -7,6 +7,7 @@ class Editor::PastQuestionsController < Editor::Base
   def search
     @past_questions = PastQuestion.search(search_params)
       .sort_by(params[:sort_method]).paginate(page: params[:page], per_page: 15)
+    set_show_columns
     render :index
   end
 
@@ -79,4 +80,25 @@ class Editor::PastQuestionsController < Editor::Base
     @tag = Tag.get_tag(tag_params_name) if tag_params_name # タグを重複しないように取得
   end
 
+  def set_show_columns
+    @show_subject = params[:show_subject]
+    @show_teacher = params[:show_teacher]
+    @show_term = params[:show_term]
+    @show_year = params[:show_year]
+    @show_views = params[:show_views]
+    @show_pub = params[:show_pub]
+    @show_tag = params[:show_tag]
+    @show_created_at = params[:show_created_at]
+
+    if @show_subject.nil? && @show_teacher.nil? && @show_term.nil? && @show_year.nil? && @show_views.nil? && @show_pub.nil? && @show_tag.nil? && @show_created_at.nil?
+      @show_subject = true
+      @show_teacher = true
+      @show_term = true
+      @show_year = true
+      @show_views = true
+      @show_pub = true
+      @show_tag = true
+      @show_created_at = true
+    end
+  end
 end
