@@ -29,6 +29,7 @@ class Editor::PastQuestionsController < Editor::Base
   def create
     @past_question = PastQuestion.new(past_question_params('create')) # 過去問データを入力内容で新規作成
     @past_question.views = 0                                          # 閲覧数を初期化
+    @past_question.pub = true
     set_exam_date_and_tag
     if @past_question.save! # エラーを見るために！をつけている。後で外す
       @past_question.tags << @tag if @tag
@@ -55,6 +56,7 @@ class Editor::PastQuestionsController < Editor::Base
   def past_question_params(action)
     attrs = [:subject, :kana, :teacher]
     attrs << :image if action == 'create'
+    attrs << :pub if action == 'update'
     params.require(:past_question).permit(attrs)
   end
 

@@ -8,8 +8,10 @@ class PastQuestion < ActiveRecord::Base
   validates :kana, length: { maximum: 100 }
   validates :teacher, length: { maximum: 20 }
   validates :image, presence: { on: create }
+  validates :pub, presence: { on: create }
   validate :check_image
   validate :check_file_path
+
 
   attr_accessor :tag_name, :year, :term
   attr_accessor :search_subject, :search_teacher, :search_year, :search_term,

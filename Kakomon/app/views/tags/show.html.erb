@@ -17,19 +17,21 @@
       </tr>
     </thead>
   <% @tag.past_questions.each do |past_question| %>
-    <tbody>
-      <td><%= link_to past_question.subject, past_question %></td>
-      <td><%= past_question.teacher %></td>
-      <td><%= past_question.exam_date.term %></td>
-      <td><%= past_question.exam_date.year %></td>
-      <td><%= past_question.views %></td>
-      <td>
-        <% past_question.tags.each do |tag| %>
-          <%= link_to tag.name, tag %>
-        <% end %>
-      </td>
-      <td><%= past_question.created_at %></td>
-    </tbody>
+    <% if past_question.pub %>
+      <tbody>
+        <td><%= link_to past_question.subject, past_question %></td>
+        <td><%= past_question.teacher %></td>
+        <td><%= past_question.exam_date.term %></td>
+        <td><%= past_question.exam_date.year %></td>
+        <td><%= past_question.views %></td>
+        <td>
+          <% past_question.tags.each do |tag| %>
+            <%= link_to tag.name, tag %>
+          <% end %>
+        </td>
+        <td><%= past_question.created_at %></td>
+      </tbody>
+    <% end %>
   <% end %>
   </table>
 </div>

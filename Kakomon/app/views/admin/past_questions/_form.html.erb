@@ -18,8 +18,16 @@
   <tr>
   	<th><%= f.label :開講期 %></th>
   	<td>
-      <% f.text_field :term %>
       <%= f.select :term, [["前期","first_semester"],["後期", "second_semester"],["通年", "year_round"],["前期集中","i_first_semester"],["後期集中", "i_second_semester"]] %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :閲覧数 %></th>
+    <td><%= f.text_field :views %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :公開フラッグ %></th>
+    <td><%= f.radio_button :pub, true, {:checked => true} %>公開する　　</td>
+    <td><%= f.radio_button :pub, false, {} %>公開しない</td>
   </tr>
   <tr>
     <th><%= f.label :タグの追加 %></th>

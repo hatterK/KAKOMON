@@ -6,6 +6,7 @@ class CreatePastQuestions < ActiveRecord::Migration
       t.string :teacher
       t.integer :views, null: false
       t.string :image, null: false
+      t.boolean :pub, null: false, default: true
 
       t.references :exam_date, null: false
 

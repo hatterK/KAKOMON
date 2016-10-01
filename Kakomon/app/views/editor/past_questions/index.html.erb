@@ -60,6 +60,7 @@ font-size: large;
         <th>開講期</th>
         <th>年度</th>
         <th>閲覧数</th>
+        <th>公開</th>
         <th>タグ</th>
         <th>追加日時</th>
         <th>編集</th>
@@ -72,6 +73,7 @@ font-size: large;
 	    <td><%= past_question.exam_date.term %></td>
 	    <td><%= past_question.exam_date.year %></td>
       <td><%= past_question.views %></td>
+      <td><%= if past_question.pub then '公開' else '非公開' end %></td>
 	    <td>
         <% past_question.tags.each do |tag| %>
           <%= link_to tag.name, [:editor, tag] %>

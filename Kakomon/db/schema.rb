@@ -29,14 +29,15 @@ ActiveRecord::Schema.define(version: 20160820222252) do
   end
 
   create_table "past_questions", force: :cascade do |t|
-    t.string   "subject",      null: false
+    t.string   "subject",                     null: false
     t.string   "kana"
     t.string   "teacher"
-    t.integer  "views",        null: false
-    t.string   "image",        null: false
-    t.integer  "exam_date_id", null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "views",                       null: false
+    t.string   "image",                       null: false
+    t.boolean  "pub",          default: true, null: false
+    t.integer  "exam_date_id",                null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "past_questions", ["exam_date_id"], name: "index_past_questions_on_exam_date_id"

@@ -7,6 +7,14 @@
 <%= render 'form', f: f %>
 
 <table>
+  <tr>
+    <th><%= f.label :一般ユーザに公開 %></th>
+    <td><%= f.radio_button :pub, true, {:checked => true} %>する　　</td>
+    <td><%= f.radio_button :pub, false, {} %>しない</td>
+  </tr>
+</table>
+
+<table>
 <% @past_question.tags.each do |tag| %>
   <tr>
     <th><%= tag.name %></th>
