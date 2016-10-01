@@ -34,8 +34,7 @@ class Admin::PastQuestionsController < Admin::Base
       @past_question.tags << @tag if @tag
       redirect_to [:admin, @past_question], notice: "過去問を追加しました。", status: :see_other
     else
-      redirect_to :admin_past_questions, notice: "追加に失敗", status: :see_other # TODO: ここ成功時とステータスコード同じなのどうにかしたい
-      # render "new"
+      render "new", notice: "追加に失敗", status: :unprocessable_entity
     end
   end
 

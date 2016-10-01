@@ -28,6 +28,7 @@
         <% else %>
           <li><%= link_to "Home", :root %></li>
         <% end %>
+      <% if current_member %>
         <% if current_page?(search_past_questions_path) %>
           <li class="active"><%= link_to "Search", :search_past_questions %></li>
         <% else %>
@@ -46,12 +47,13 @@
             <li><%= link_to "管理者ページ", :admin_root %></li>
           <% end %>
         <% end %>
-        <% if current_member %>
-          <li><%= link_to "ログアウト", :session, method: :delete,
-            data: { confirm: "ログアウトしますか？" }  %><span class="sr-only">(current)</span></li>
-        <% else %>
-          <li><%= link_to "ログイン", :members %><span class="sr-only">(current)</span></li>
-        <% end %>
+        <li><%= link_to "ログアウト", :session, method: :delete,
+          data: { confirm: "ログアウトしますか？" }  %><span class="sr-only">(current)</span></li>
+      <% else %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "ログイン", :members %><span class="sr-only">(current)</span></li>
+      <% end %>
       </ul>
     </div>
   </div>

@@ -4,10 +4,12 @@
 
 <%= render 'form', f: f %>
 
-<tr>
-  <th><%= f.label :ファイルアップロード %></th>
-  <td><%= f.file_field :image %></td>
-</tr>
+<table>
+  <tr>
+    <th><%= f.label :ファイルアップロード %></th>
+    <td><%= f.file_field :image %></td>
+  </tr>
+</table>
 <p>
 	<%= f.submit %>
 </p>

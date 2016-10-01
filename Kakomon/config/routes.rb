@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  scope( '/kakomon' ) do
   root 'past_questions#index'
 
   resources :past_questions, only: [:index, :show] do
