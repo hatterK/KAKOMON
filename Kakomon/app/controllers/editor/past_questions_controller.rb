@@ -13,7 +13,7 @@ class Editor::PastQuestionsController < Editor::Base
   def show
     @past_question = PastQuestion.find(params[:id])
     @past_question.views = @past_question.views + 1
-    @past_question.save! # エラーを見るために！をつけている。
+    @past_question.save
   end
 
   def new
@@ -31,7 +31,7 @@ class Editor::PastQuestionsController < Editor::Base
     @past_question.views = 0                                          # 閲覧数を初期化
     @past_question.pub = true
     set_exam_date_and_tag
-    if @past_question.save! # エラーを見るために！をつけている。後で外す
+    if @past_question.save
       @past_question.tags << @tag if @tag
       redirect_to [:editor, @past_question], notice: "過去問を追加しました。", status: :see_other
     else
@@ -44,7 +44,7 @@ class Editor::PastQuestionsController < Editor::Base
     @past_question.assign_attributes(past_question_params('update')) # 入力内容でパラメータを書き換え
     set_exam_date_and_tag
     @past_question.tags << @tag if @tag                              # 過去問データにタグ付け
-    if @past_question.save! # エラーを見るためにつけている。あとで外す。
+    if @past_question.save
       redirect_to [:editor, @past_question], notice: "過去問の情報を編集しました。", status: :see_other
     else
       render "edit", notice: "情報の編集に失敗", status: :unprocessable_entity
