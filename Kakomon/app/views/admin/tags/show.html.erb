@@ -2,6 +2,9 @@
 <p><%= flash.notice %></p>
 
 <h2><%= @tag.name %></h2>
+<p><%= link_to "タグの情報の編集", [:edit, :admin, @tag] %></p>
+<p><%= link_to "このタグを削除", [:admin, @tag], method: :delete,
+  data: { confirm: "本当に削除しますか?\nこのタグが付けられている過去問全てに影響が生じます。注意してください。"} %></p>
 
 <p><%= link_to "管理ページのトップへ戻る", :admin_root%></p>
 

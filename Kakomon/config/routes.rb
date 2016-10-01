@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     resources :exam_dates do
       collection { get 'search' }
     end
-    resources :tags, only: [:index, :show]
+    resources :tags
     resources :members
   end
 
