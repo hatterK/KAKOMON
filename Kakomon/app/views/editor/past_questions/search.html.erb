@@ -62,32 +62,64 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>科目名<%= check_box_tag :show_subject, true, true, {} %></th>
+          <% if @show_subject %>
+            <th>科目名<%= check_box_tag :show_subject, true, true, {} %></th>
+          <% end %>
+          <% if @show_teacher %>
           <th>教授<%= check_box_tag :show_teacher, true, true, {} %></th>
+          <% end %>
+          <% if @show_term %>
           <th>開講期<%= check_box_tag :show_term, true, true, {} %></th>
+          <% end %>
+          <% if @show_year %>
           <th>年度<%= check_box_tag :show_year, true, true, {} %></th>
+          <% end %>
+          <% if @show_views %>
           <th>閲覧数<%= check_box_tag :show_views, true, true, {} %></th>
+          <% end %>
+          <% if @show_pub %>
           <th>公開<%= check_box_tag :show_pub, true, true, {} %></th>
+          <% end %>
+          <% if @show_tag %>
           <th>タグ<%= check_box_tag :show_tag, true, true, {} %></th>
+          <% end %>
+          <% if @show_created_at %>
           <th>追加日時<%= check_box_tag :show_created_at, true, true, {} %></th>
+          <% end %>
           <th>編集</th>
         </tr>
       </thead>
     <% end %>
     <% @past_questions.each do |past_question| %>
       <tbody>
+        <% if @show_subject %>
         <td><%= link_to past_question.subject, [:editor, past_question] %></td>
+        <% end %>
+        <% if @show_teacher %>
         <td><%= past_question.teacher %></td>
+        <% end %>
+        <% if @show_term %>
         <td><%= japanese_term(past_question.exam_date.term) %></td>
+        <% end %>
+        <% if @show_year %>
         <td><%= past_question.exam_date.year %></td>
+        <% end %>
+        <% if @show_views %>
         <td><%= past_question.views %></td>
+        <% end %>
+        <% if @show_pub %>
         <td><%= if past_question.pub then '公開' else '非公開' end %></td>
+        <% end %>
+        <% if @show_tag %>
         <td>
           <% past_question.tags.each do |tag| %>
             <%= link_to tag.name, [:editor, tag] %>
           <% end %>
         </td>
+        <% end %>
+        <% if @show_created_at %>
         <td><%= past_question.created_at %></td>
+        <% end %>
         <td><%= link_to "編集", [:edit, :editor, past_question], class:'btn btn-default btn-sm' %></td>
       </tbody>
     <% end %>

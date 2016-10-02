@@ -8,7 +8,6 @@ class Editor::PastQuestionsController < Editor::Base
     @past_questions = PastQuestion.search(search_params)
       .sort_by(params[:sort_method]).paginate(page: params[:page], per_page: 15)
     set_show_columns
-    render :index
   end
 
   def show
