@@ -1,7 +1,7 @@
 <table>
   <tr>
   	<th width="100"><%= form.label :年度 %></th>
-  	<td><%= form.text_field :year %></td>
+  	<td><%= form.number_field :year, in:2011..2100, title: "2011から2100の値を入力してください" %>></td>
   </tr>
   <tr>
   	<th><%= form.label :開講期 %></th>

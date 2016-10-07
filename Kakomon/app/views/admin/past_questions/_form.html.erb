@@ -13,7 +13,7 @@
   </tr>
   <tr>
   	<th><%= f.label :年度 %></th>
-  	<td><%= f.text_field :year %></td>
+  	<td><%= f.number_field :year, in:2011..2100, title: "2011から2100の値を入力してください" %></td>
   </tr>
   <tr>
   	<th><%= f.label :開講期 %></th>
