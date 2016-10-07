@@ -59,7 +59,7 @@ class Editor::PastQuestionsController < Editor::Base
 
   def past_question_params(action)
     attrs = [:subject, :kana, :teacher]
-    attrs << :image if action == 'create'
+    attrs << {images: []} if action == 'create'
     attrs << :pub if action == 'update'
     params.require(:past_question).permit(attrs)
   end

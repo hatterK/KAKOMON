@@ -7,29 +7,33 @@ class PastQuestion < ActiveRecord::Base
   validates :subject, length: { maximum: 100 }
   validates :kana, length: { maximum: 100 }
   validates :teacher, length: { maximum: 20 }
-  validates :image, presence: { on: create }
+  validates :images, presence: { on: create }
   validates :pub, presence: { on: create }
   validate :check_image
   validate :check_file_path
 
-
   attr_accessor :tag_name, :year, :term
   attr_accessor :search_subject, :search_teacher, :search_year, :search_term,
     :search_tag1, :search_tag2, :search_tag3, :sort_method
+  serialize :images
 
-  mount_uploader :image, ImageUploader
+  mount_uploaders :images, ImageUploader
 
   private
 
   def check_image
-    errors.add(:image, 'too_big_image') if image && image.size > 3.megabytes
+    errors.add(:image, 'too_big_image') if images && images.size > 3.megabytes
   end
 
   def check_file_path
-    if image && image.current_path
-      errors.add(:image, 'image_not_exist') unless File.exist?(image.current_path)
-    else
-      errors.add(:image, 'image_not_exist')
+    if images
+      images.each do |image|
+        if image && image.current_path
+          errors.add(:image, 'image_not_exist') unless File.exist?(image.current_path)
+        else
+          errors.add(:image, 'image_not_exist')
+        end
+      end
     end
   end
 

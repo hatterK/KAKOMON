@@ -59,7 +59,7 @@ class Admin::PastQuestionsController < Admin::Base
 
   def past_question_params(action)
     attrs = [:subject, :kana, :teacher, :views, :pub]
-    attrs << :image if action == 'create'
+    attrs << {images: []} if action == 'create'
     params.require(:past_question).permit(attrs)
   end
 

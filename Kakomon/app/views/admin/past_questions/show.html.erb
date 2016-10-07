@@ -32,10 +32,11 @@
   <%= submit_tag "タグを追加" %>
 </p>
 
-<p><%= @past_question.image.current_path%></p>
-
-<% if File.extname(@past_question.image.current_path) == '.pdf' %>
-  <object data="<%= base64_image_data %>" width="100%" height="800px" alt="過去問の画像"></object>
-<% else %>
-  <object data="<%= base64_image_data %>" width="80%" height="" alt="過去問の画像"></object>
+<% @past_question.images.each do |image| %>
+  <p><%= image.current_path %></p>
+  <% if File.extname(image.url) == '.pdf' %>
+    <object data="<%= base64_image_data(image.current_path) %>" width="100%" height="800px" alt="過去問の画像"></object>
+  <% else %>
+    <object data="<%= base64_image_data(image.current_path) %>" width="80%" height="" alt="過去問の画像"></object>
+  <% end %>
 <% end %>

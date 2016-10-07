@@ -7,7 +7,7 @@
 
   <tr>
     <th><%= f.label :ファイルアップロード %></th>
-    <td><%= f.file_field :image %></td>
+    <td><%= f.file_field :images, multiple: true %></td>
   </tr>
   <p>
   	<%= f.submit %>

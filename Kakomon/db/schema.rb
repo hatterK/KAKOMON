@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20160820222252) do
     t.string   "kana"
     t.string   "teacher"
     t.integer  "views",                       null: false
-    t.string   "image",                       null: false
     t.boolean  "pub",          default: true, null: false
+    t.string   "images",                      null: false
     t.integer  "exam_date_id",                null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
