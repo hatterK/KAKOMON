@@ -26,13 +26,19 @@
     <div class="form-group row">
       <label for="search_term" class="col-xs-2 col-form-label">開講期</label>
       <div class="col-xs-4">
-        <%= select_tag :search_term, options_for_select(term_option), selected: "first_semester", class: "form-control" %>
+        <%= select_tag :search_term, options_for_select(term_option, @term), class: "form-control" %>
       </div>
     </div>
     <div class="form-group row">
-      <label for="search_tag1" class="col-xs-2 col-form-label">タグ名</label>
+      <label for="search_pub" class="col-xs-2 col-form-label">一般公開</label>
       <div class="col-xs-4">
-        <%= text_field_tag "search_tag1", params[:search_tag1], class: "form-control"%>
+        <%= select_tag :search_pub, options_for_select([["条件なし",""],["公開","true"],["非公開","false"]], @pub), class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="search_tag1" class="col-xs-2 col-form-label">全学共通・専門科目</label>
+      <div class="col-xs-4">
+        <%= select_tag :search_tag1, options_for_select(faculty_option, @faculty), class: "form-control" %>
       </div>
     </div>
     <div class="form-group row">
@@ -50,7 +56,7 @@
     <div class="form-group row">
       <label for="sort_method" class="col-xs-2 col-form-label">ソート方法</label>
       <div class="col-xs-4">
-        <%= select_tag :sort_method, options_for_select(sort_option), class: "form-control" %>
+        <%= select_tag :sort_method, options_for_select(sort_option, @sort), class: "form-control" %>
       </div>
     </div>
     <div class="form-group row">

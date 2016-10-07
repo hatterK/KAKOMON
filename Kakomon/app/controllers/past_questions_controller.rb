@@ -11,6 +11,7 @@ class PastQuestionsController < ApplicationController
       .sort_by(params[:sort_method]).paginate(page: params[:page], per_page: 15)
     @sort = params[:sort_method]
     @term = params[:search_term]
+    @faculty = params[:search_tag1]
   end
 
   def show

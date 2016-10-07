@@ -40,6 +40,12 @@ class PastQuestion < ActiveRecord::Base
         "%#{query[:search_subject]}%",
         "%#{query[:search_subject]}%"
       ).where("teacher LIKE ?", "%#{query[:search_teacher]}%")
+      if query[:search_pub].present?
+        case query[:search_pub]
+        when "true" then list = list.where(pub: true)
+        when "false" then list = list.where(pub: false)
+        end
+      end
       if query[:search_year].present? || query[:search_term].present?
         list = list.joins(:exam_date)
         list = list.where("exam_dates.year = ?", query[:search_year]) if query[:search_year].present?

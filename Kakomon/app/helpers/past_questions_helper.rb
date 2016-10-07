@@ -13,14 +13,13 @@ module PastQuestionsHelper
     end
   end
 
+  def faculty_option
+    [["条件なし",""],["全学共通科目","全学共通科目"],["文学部","文学部"],["教育学部","教育学部"],["法学部","法学部"],
+    ["経済学部","経済学部"],["理学部","理学部"],["医学部医学科","医学部医学科"],["医学部人間健康科学科","医学部人間健康科学科"],
+    ["薬学部","薬学部"],["工学部","工学部"],["農学部","農学部"],["総合人間学部","総合人間学部"]]
+  end
+
   def sort_option
-    case @sort
-    when 'year_desc' then [["年度降順","year_desc"],["追加日時","created_at"],["年度昇順", "year_asce"],["閲覧数", "views"],["教科名","subject"],["教授名", "teacher"]]
-    when 'year_asce' then [["年度昇順", "year_asce"],["追加日時","created_at"],["年度降順","year_desc"],["閲覧数", "views"],["教科名","subject"],["教授名", "teacher"]]
-    when 'views' then [["閲覧数", "views"],["追加日時","created_at"],["年度降順","year_desc"],["年度昇順", "year_asce"],["教科名","subject"],["教授名", "teacher"]]
-    when 'subject' then [["教科名","subject"],["追加日時","created_at"],["年度降順","year_desc"],["年度昇順", "year_asce"],["閲覧数", "views"],["教授名", "teacher"]]
-    when 'teacher' then [["教授名", "teacher"],["追加日時","created_at"],["年度降順","year_desc"],["年度昇順", "year_asce"],["閲覧数", "views"],["教科名","subject"]]
-    else [["追加日時","created_at"],["年度降順","year_desc"],["年度昇順", "year_asce"],["閲覧数", "views"],["教科名","subject"],["教授名", "teacher"]]
-    end
+    [["追加日時","created_at"],["年度降順","year_desc"],["年度昇順", "year_asce"],["閲覧数", "views"],["教科名","subject"],["教授名", "teacher"]]
   end
 end
