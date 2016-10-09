@@ -13,4 +13,41 @@
     <li>過去問数：　<%= @exam_date.past_questions.count %></li>
     <li>作成日時：　<%= @exam_date.created_at %></li>
   </ul>
+
+  <h2>この試験日時の過去問一覧</h2>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>科目名</th>
+        <th>教授</th>
+        <th>開講期</th>
+        <th>年度</th>
+        <th>閲覧数</th>
+        <th>公開フラッグ</th>
+        <th>タグ</th>
+        <th>追加日時</th>
+        <th>編集・削除</th>
+      </tr>
+    </thead>
+  <% @exam_date.past_questions.each do |past_question| %>
+    <tbody>
+      <td><%= link_to past_question.subject, [:admin, past_question] %></td>
+      <td><%= past_question.teacher %></td>
+      <td><%= past_question.exam_date.term %></td>
+      <td><%= past_question.exam_date.year %></td>
+      <td><%= past_question.views %></td>
+      <td><%= past_question.pub %></td>
+      <td>
+        <% past_question.tags.each do |tag| %>
+          <%= link_to tag.name, [:admin, tag] %>
+        <% end %>
+      </td>
+      <td><%= past_question.created_at %></td>
+      <td><%= link_to "編集", [:edit, :admin, past_question], class:'btn btn-default btn-sm' %>
+          <%= link_to "削除", [:admin, past_question], method: :delete,
+            data: {confirm: "本当に削除しますか?" }, class:'btn btn-danger btn-sm' %>
+      </td>
+    </tbody>
+  <% end %>
+  </table>
 </div>
