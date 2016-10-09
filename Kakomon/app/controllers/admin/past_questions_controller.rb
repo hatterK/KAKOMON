@@ -7,6 +7,9 @@ class Admin::PastQuestionsController < Admin::Base
   def search
     @past_questions = PastQuestion.search(search_params)
       .sort_by(params[:sort_method]).paginate(page: params[:page], per_page: 15)
+    @term = params[:search_term]
+    @pub = params[:search_pub]
+    @sort = params[:sort_method]
     render :index
   end
 
@@ -71,7 +74,7 @@ class Admin::PastQuestionsController < Admin::Base
 
   def search_params
     params.permit(:search_subject, :search_teacher, :search_year, :search_term,
-                  :search_tag1, :search_tag2, :search_tag3)
+                  :search_pub, :search_tag1, :search_tag2, :search_tag3)
   end
 
   def set_exam_date_and_tag

@@ -17,12 +17,15 @@
         </tr>
         <tr>
           <th>年度　：　</th>
-          <td><%= text_field_tag "search_year", params[:search_year] %></td>
+          <td><%= number_field_tag "search_year", params[:search_year], in:2011..2100, title: "2011から2100の値を入力してください" %></td>
         </tr>
         <tr>
           <th>開講期　：　</th>
-          <td><%= text_field_tag "search_term", params[:search_term] %></td>
+          <td><%= select_tag :search_term, options_for_select(term_option, @term) %></td>
         </tr>
+        <tr>
+          <th>公開フラッグ　：　</th>
+          <td><%= select_tag :search_pub, options_for_select([["条件なし",""],["公開","true"],["非公開","false"]], @pub) %></td>
         <tr>
           <th>タグ名　：　</th>
           <td><%= text_field_tag "search_tag1", params[:search_tag1] %></td>
@@ -37,7 +40,7 @@
         </tr>
         <tr>
           <th>ソート方法　：　</th>
-          <td><%= text_field_tag "sort_method", params[:sort_method] %></td>
+          <td><%= select_tag :sort_method, options_for_select(sort_option, @sort) %></td>
         </tr>
         <tr>
           <td><%= submit_tag "検索" %></td>
