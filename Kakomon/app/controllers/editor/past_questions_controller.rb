@@ -16,8 +16,6 @@ class Editor::PastQuestionsController < Editor::Base
 
   def show
     @past_question = PastQuestion.find(params[:id])
-    @past_question.views = @past_question.views + 1
-    @past_question.save
   end
 
   def new
