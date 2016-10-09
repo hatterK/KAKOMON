@@ -7,5 +7,5 @@
   <%= render "body" %>
   <p><%= link_to "編集", [:edit, :admin, @member] %></p>
   <p><%= link_to "削除", [:admin, @member], method: :delete,
-    data: { confirm: "本当に削除しますか？" } %></p>
+    data: { confirm: "本当に削除しますか？\nメンバーの削除は過去問サイト全体に大きな影響を与えます。十分に注意してください。" } %></p>
 </div>

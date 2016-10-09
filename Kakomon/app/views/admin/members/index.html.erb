@@ -11,16 +11,18 @@
   <% if @members.present? %>
   <table>
     <tr>
-      <th>ユーザー名</th>
+      <th>ユーザー名&nbsp;&nbsp;&nbsp;</th>
+      <th>アクセス権限&nbsp;&nbsp;&nbsp;</th>
       <th>操作</th>
     </tr>
     <% @members.each do |member| %>
     <tr>
       <td><%= link_to member.name, [:admin, member] %></td>
+      <td><%= member.access_authority %></td>
       <td>
         <%= link_to "編集", [:edit, :admin, member] %>
         <%= link_to "削除", [:admin, member], method: :delete,
-              data: { confirm: "本当に削除しますか？"} %>
+              data: { confirm: "本当に削除しますか？\nメンバーの削除は過去問サイト全体に大きな影響を与えます。十分に注意してください。"} %>
       </td>
     </tr>
     <% end %>

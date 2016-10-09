@@ -1,10 +1,21 @@
 <table>
   <tr>
-    <th>ユーザー名</th>
+    <th>ユーザー名&nbsp;&nbsp;</th>
     <td><%= @member.name %></td>
   </tr>
   <tr>
-    <th>アクセス権限</th>
+    <th>member_id&nbsp;&nbsp;</th>
+    <td><%= @member.id %></td>
+  <tr>
+    <th>アクセス権限&nbsp;&nbsp;</th>
     <td><%= @member.access_authority %></td>
+  </tr>
+  <tr>
+    <th>追加日時&nbsp;&nbsp;</th>
+    <td><%= @member.created_at %></td>
+  </tr>
+  <tr>
+    <th>変更日時&nbsp;&nbsp;</th>
+    <td><%= @member.updated_at %></td>
   </tr>
 </table>
