@@ -3,6 +3,11 @@ class Editor::TagsController < Editor::Base
     @tags = Tag.order('name').paginate(page: params[:page], per_page: 15)
   end
 
+  def search
+    @tags = Tag.where("name LIKE ?", "%#{params[:search_name]}%").order(:id).paginate(page: params[:page], per_page: 15)
+    render 'index'
+  end
+
   def show
     @tag = Tag.find(params[:id])
   end

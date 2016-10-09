@@ -2,6 +2,18 @@
   <h1>タグの一覧</h1>
   <% if flash.notice %><p><font color=#ff0000><%= flash.notice %></font></p><% end %>
 
+  <%= form_tag :search_editor_tags, method: :get do %>
+    <table>
+      <tr>
+        <th>タグ名　：　</th>
+        <td><%= text_field_tag "search_name", params[:search_name] %></td>
+      </tr>
+      <tr>
+        <td><%= submit_tag "検索" %></td>
+      </tr>
+    </table>
+  <% end %>
+
   <table class="table table-hover">
     <thead>
       <tr>

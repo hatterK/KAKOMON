@@ -26,7 +26,9 @@ Rails.application.routes.draw do
         member { get 'untag' }
       end
     end
-    resources :tags, only: [:index, :show]
+    resources :tags, only: [:index, :show] do
+      collection { get 'search' }
+    end
   end
 
   namespace :admin do
