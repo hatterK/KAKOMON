@@ -42,6 +42,7 @@ class Admin::ExamDatesController < Admin::Base
 
   def search
     @exam_dates = ExamDate.search(params[:search_year], params[:search_term]).paginate(page: params[:page], per_page: 15)
+    @term = params[:search_term]
     render 'index'
   end
 

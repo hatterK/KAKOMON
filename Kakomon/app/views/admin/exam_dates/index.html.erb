@@ -10,11 +10,11 @@
     <table>
       <tr>
         <th>年度　：　</th>
-        <td><%= text_field_tag "search_year", params[:search_year] %></td>
+        <td><%= number_field_tag "search_year", params[:search_year], in:2011..2100 %></td>
       </tr>
       <tr>
         <th>開講期　：　</th>
-        <td><%= text_field_tag "search_term", params[:search_term] %></td>
+        <td><%= select_tag "search_term", options_for_select(term_option, @term) %></td>
       </tr>
       <tr>
         <td><%= submit_tag "検索" %></td>
