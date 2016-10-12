@@ -1,6 +1,6 @@
 class Admin::TagsController < Admin::Base
   def index
-    @tags = Tag.order('name').paginate(page: params[:page], per_page: 15)
+    @tags = Tag.order('name').where("name LIKE ?", "%#{params[:name]}%").paginate(page: params[:page], per_page: 15)
   end
 
   def show

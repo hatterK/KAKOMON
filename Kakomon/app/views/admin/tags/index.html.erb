@@ -3,6 +3,19 @@
   <p><%= flash.notice %></p>
 
   <p><%= link_to 'タグの新規作成', :new_admin_tag %></p>
+
+  <%= form_tag :admin_tags, method: :get do %>
+    <table>
+      <tr>
+        <th>タグ名　：　</th>
+        <td><%= text_field_tag "name", params[:name], in:2011..2100 %></td>
+      </tr>
+      <tr>
+        <td><%= submit_tag "検索" %></td>
+      </tr>
+    </table>
+  <% end %>
+
   <h2>タグの一覧</h2>
 
   <table class="table table-hover">
