@@ -13,6 +13,9 @@ Kakomon/db/*.sqlite3-journal
 Kakomon/log/*.log
 Kakomon/tmp
 
+# Ignore secret base key file
+Kakomon/config/secrets.yml
+
 # Ignore other unneeded files.
 doc/
 *.swp
