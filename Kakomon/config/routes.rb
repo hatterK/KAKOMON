@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  scope( '/kakomon' ) do
   root 'past_questions#index'
 
   resources :past_questions, only: [:index, :show] do
@@ -50,8 +49,6 @@ Rails.application.routes.draw do
   get 'bad_request' => 'error#bad_request'
   get 'internal_server_error' => 'error#internal_server_error'
   match "*anything" => 'error#not_found', via: [:get, :post, :patch, :delete]
-
-end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
